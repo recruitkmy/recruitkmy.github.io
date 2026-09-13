@@ -184,6 +184,48 @@
   .career-block ul{margin:0; padding-left:18px;}
   .career-block li{margin-bottom:9px; color:var(--ink-soft);}
 
+  .timeline{
+    position:relative;
+    margin-top:4px;
+    padding-left:22px;
+    border-left:2px solid var(--blue);
+  }
+  .timeline-item{
+    position:relative;
+    padding:0 0 28px 0;
+  }
+  .timeline-item:last-child{padding-bottom:0;}
+  .timeline-item::before{
+    content:"";
+    position:absolute;
+    left:-29px;
+    top:7px;
+    width:12px;
+    height:12px;
+    border:2px solid var(--blue);
+    background:var(--paper);
+    border-radius:50%;
+  }
+  .timeline-item .period{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.78rem;
+    color:var(--grey);
+    margin-bottom:2px;
+  }
+  .timeline-item .place{
+    font-size:1.03rem;
+    font-weight:600;
+    color:var(--ink);
+    margin:0;
+  }
+  .timeline-item .detail{
+    font-size:0.9rem;
+    color:var(--ink-soft);
+    margin:3px 0 0;
+  }
+  .timeline-item.military::before{border-color:var(--orange);}
+  .timeline-item.military .place{color:var(--ink);}
+
   .card-grid{
     display:grid;
     grid-template-columns:1fr 1fr;
@@ -271,7 +313,8 @@
       <nav>
         <ul id="nav-list">
           <li><a href="#intro"><span class="no">00</span>소개</a></li>
-          <li><a href="#career"><span class="no">01</span>경력</a></li>
+          <li><a href="#education"><span class="no">01</span>학력</a></li>
+          <li><a href="#career"><span class="no">02</span>경력</a></li>
         </ul>
       </nav>
     </div>
@@ -299,12 +342,40 @@
         </div>
       </section>
 
+      <section id="education">
+        <div class="sec-head">
+          <h2>학력</h2>
+          <span class="sheet-tag">SHEET 01<br>EDUCATION</span>
+        </div>
+        <div class="dim-divider"><span class="dim-label">01 — EDUCATION &amp; MILITARY SERVICE</span></div>
+
+        <div class="timeline">
+          <div class="timeline-item">
+            <div class="period">2018.03 ~ 2021.02</div>
+            <p class="place">심인고등학교</p>
+            <p class="detail">졸업</p>
+          </div>
+
+          <div class="timeline-item">
+            <div class="period">2021.03 ~ 현재</div>
+            <p class="place">영남대학교</p>
+            <p class="detail">로봇공학과 재학중</p>
+          </div>
+
+          <div class="timeline-item military">
+            <div class="period">2022.03.22 ~ 2023.09.21</div>
+            <p class="place">대한민국 육군 제29사단 119연대 기동중대</p>
+            <p class="detail">군 복무</p>
+          </div>
+        </div>
+      </section>
+
       <section id="career">
         <div class="sec-head">
           <h2>경력</h2>
-          <span class="sheet-tag">SHEET 01<br>EXPERIENCE</span>
+          <span class="sheet-tag">SHEET 02<br>EXPERIENCE</span>
         </div>
-        <div class="dim-divider"><span class="dim-label">01 — 학부연구생</span></div>
+        <div class="dim-divider"><span class="dim-label">02 — 학부연구생</span></div>
 
         <div class="career-block">
           <p class="org">영남대학교 로봇공학과 로봇시스템 실험실</p>
@@ -497,7 +568,7 @@ function navItemHTML(cat, sheetNo){
 document.addEventListener("DOMContentLoaded", function(){
   const navList = document.getElementById("nav-list");
   const root = document.getElementById("categories-root");
-  let sheetNo = 2; // 00 소개, 01 경력 다음 번호부터 시작
+  let sheetNo = 3; // 00 소개, 01 학력, 02 경력 다음 번호부터 시작
   let navHTML = "";
   let sectionsHTML = "";
 
