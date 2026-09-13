@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>OOO — 엔지니어링 경험 아카이브</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;500;600;700&family=Noto+Serif+KR:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#f7f5ef;
+    --paper-line:#ddd7c8;
+    --ink:#1c2430;
+    --ink-soft:#4c5563;
+    --blue:#2f5c8a;
+    --orange:#c1502e;
+    --grey:#8b8f8a;
+    --card:#fffefb;
+    --maxw:760px;
+    --sidebar-w:252px;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:
+      repeating-linear-gradient(to right, transparent, transparent 31px, rgba(221,215,200,0.5) 31px, rgba(221,215,200,0.5) 32px),
+      repeating-linear-gradient(to bottom, transparent, transparent 31px, rgba(221,215,200,0.35) 31px, rgba(221,215,200,0.35) 32px),
+      var(--paper);
+    color:var(--ink);
+    font-family:'IBM Plex Sans KR', sans-serif;
+    line-height:1.6;
+  }
+  a{color:var(--blue);}
+
+  .layout{display:flex; min-height:100vh;}
+  .sidebar{
+    position:fixed;
+    top:0; left:0; bottom:0;
+    width:var(--sidebar-w);
+    padding:40px 28px;
+    border-right:1px solid var(--paper-line);
+    background:linear-gradient(180deg, rgba(247,245,239,0.97), rgba(247,245,239,0.9));
+    display:flex;
+    flex-direction:column;
+    justify-content:space-between;
+    overflow-y:auto;
+  }
+  .sidebar-top .mark{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.72rem;
+    color:var(--grey);
+    letter-spacing:0.03em;
+    margin-bottom:6px;
+  }
+  .sidebar-top .role-target{
+    font-size:0.95rem;
+    font-weight:600;
+    color:var(--ink);
+    margin-bottom:32px;
+    line-height:1.5;
+  }
+  .sidebar nav ul{list-style:none; padding:0; margin:0;}
+  .sidebar nav li{margin-bottom:4px;}
+  .sidebar nav a{
+    display:flex;
+    gap:10px;
+    align-items:baseline;
+    text-decoration:none;
+    color:var(--ink-soft);
+    font-size:0.92rem;
+    padding:7px 6px;
+    border-radius:3px;
+    transition:background .15s ease, color .15s ease;
+  }
+  .sidebar nav a:hover{background:rgba(47,92,138,0.08); color:var(--blue);}
+  .sidebar nav a .no{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.72rem;
+    color:var(--grey);
+    width:18px;
+    flex-shrink:0;
+  }
+  .sidebar-bottom{
+    font-size:0.76rem;
+    color:var(--grey);
+    border-top:1px solid var(--paper-line);
+    padding-top:16px;
+  }
+
+  .main{
+    margin-left:var(--sidebar-w);
+    padding:64px 48px 120px;
+    max-width:calc(var(--maxw) + 96px);
+  }
+  .content{max-width:var(--maxw);}
+
+  .dim-divider{
+    position:relative;
+    display:flex;
+    align-items:center;
+    gap:14px;
+    margin:6px 0 34px;
+  }
+  .dim-divider::before, .dim-divider::after{
+    content:"";
+    flex:1;
+    height:1px;
+    background:var(--grey);
+  }
+  .dim-divider .dim-label{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.72rem;
+    color:var(--grey);
+    white-space:nowrap;
+  }
+
+  section{margin-bottom:96px; scroll-margin-top:48px;}
+  h1,h2,h3{font-family:'IBM Plex Sans KR', sans-serif; margin:0; color:var(--ink);}
+
+  .hero .hero-kicker{
+    font-size:0.92rem;
+    color:var(--blue);
+    font-weight:500;
+    margin:0 0 14px;
+  }
+  .hero h1{
+    font-size:2.6rem;
+    font-weight:700;
+    letter-spacing:-0.01em;
+    margin-bottom:10px;
+  }
+  .hero .hero-role{
+    font-size:1.02rem;
+    color:var(--ink-soft);
+    margin:0 0 26px;
+  }
+  .hero .hero-lede{
+    font-family:'Noto Serif KR', serif;
+    font-size:1.08rem;
+    line-height:1.85;
+    color:var(--ink);
+    max-width:640px;
+  }
+  .hero-meta{
+    display:flex;
+    flex-wrap:wrap;
+    gap:22px;
+    margin-top:30px;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.8rem;
+    color:var(--grey);
+  }
+  .hero-meta span b{color:var(--ink-soft); font-weight:500;}
+
+  .sec-head{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-end;
+    margin-bottom:22px;
+  }
+  .sec-head h2{font-size:1.5rem; font-weight:600;}
+  .sec-head .sheet-tag{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.72rem;
+    color:var(--grey);
+    text-align:right;
+    line-height:1.5;
+    white-space:nowrap;
+  }
+
+  .career-block{
+    border-left:2px solid var(--blue);
+    padding-left:22px;
+  }
+  .career-block .org{font-weight:600; font-size:1.05rem;}
+  .career-block .meta{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.78rem;
+    color:var(--grey);
+    margin:4px 0 16px;
+  }
+  .career-block ul{margin:0; padding-left:18px;}
+  .career-block li{margin-bottom:9px; color:var(--ink-soft);}
+
+  .card-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:18px;
+  }
+  .card{
+    background:var(--card);
+    border:1px solid var(--paper-line);
+    padding:22px 22px 24px;
+    border-radius:2px;
+  }
+  .card .title-block{
+    display:grid;
+    grid-template-columns:1fr auto;
+    gap:6px 18px;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.7rem;
+    color:var(--grey);
+    border-bottom:1px solid var(--paper-line);
+    padding-bottom:10px;
+    margin-bottom:14px;
+  }
+  .card h3{font-size:1.02rem; font-weight:600; margin-bottom:10px;}
+  .card p{color:var(--ink-soft); font-size:0.93rem; margin:0 0 12px;}
+  .card .result{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.82rem;
+    color:var(--orange);
+    font-weight:500;
+  }
+  .tools{display:flex; flex-wrap:wrap; gap:6px; margin-top:14px;}
+  .tools span{
+    font-size:0.72rem;
+    color:var(--ink-soft);
+    border:1px solid var(--paper-line);
+    padding:3px 8px;
+    border-radius:2px;
+  }
+  .card.is-example{border-style:dashed; border-color:var(--orange);}
+  .card.is-example .title-block{color:var(--orange);}
+
+  footer{
+    max-width:var(--maxw);
+    color:var(--grey);
+    font-size:0.82rem;
+    padding-top:24px;
+    border-top:1px solid var(--paper-line);
+  }
+  footer .fill-in{color:var(--orange);}
+
+  @media (max-width:880px){
+    .sidebar{
+      position:static;
+      width:100%;
+      height:auto;
+      flex-direction:row;
+      align-items:center;
+      padding:18px 20px;
+      overflow-x:auto;
+    }
+    .sidebar-top{display:flex; align-items:center; gap:18px;}
+    .sidebar-top .role-target{margin-bottom:0; white-space:nowrap;}
+    .sidebar nav ul{display:flex; gap:4px;}
+    .sidebar nav li{margin-bottom:0;}
+    .sidebar-bottom{display:none;}
+    .main{margin-left:0; padding:40px 22px 90px;}
+    .card-grid{grid-template-columns:1fr;}
+    .hero h1{font-size:2rem;}
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto;}
+  }
+</style>
+</head>
+<body>
+
+<div class="layout">
+  <aside class="sidebar">
+    <div class="sidebar-top">
+      <div>
+        <p class="mark">PORTFOLIO ARCHIVE</p>
+        <p class="role-target">기계공학 · 로봇 시스템<br>엔지니어링 경험 아카이브</p>
+      </div>
+      <nav>
+        <ul id="nav-list">
+          <li><a href="#intro"><span class="no">00</span>소개</a></li>
+          <li><a href="#career"><span class="no">01</span>경력</a></li>
+        </ul>
+      </nav>
+    </div>
+    <div class="sidebar-bottom">
+      지원 회사에 상관없이 재사용할 수 있는<br>개인 기록 아카이브입니다.
+    </div>
+  </aside>
+
+  <main class="main">
+    <div class="content">
+
+      <section id="intro" class="hero">
+        <p class="hero-kicker">기계공학 · 로봇 시스템 · 해석 엔지니어</p>
+        <h1>OOO</h1>
+        <p class="hero-role">구조 · 열 · 진동 해석 / 로봇 기구설계 / 현장실증</p>
+        <p class="hero-lede">
+          영남대학교 로봇시스템 실험실에서 구조, 열, 진동 해석 연구를 수행하며
+          ANSYS 기반 유한요소해석과 모드해석 경험을 쌓았고, 로봇팔 설계·제작과
+          방산 부품 제조공장 현장실증을 통해 설계를 실제 장치와 연결하는 경험을 쌓아왔습니다.
+        </p>
+        <div class="hero-meta">
+          <span><b>이메일</b> — email@example.com</span>
+          <span><b>GitHub</b> — github.com/username</span>
+          <span><b>지역</b> — 대구</span>
+        </div>
+      </section>
+
+      <section id="career">
+        <div class="sec-head">
+          <h2>경력</h2>
+          <span class="sheet-tag">SHEET 01<br>EXPERIENCE</span>
+        </div>
+        <div class="dim-divider"><span class="dim-label">01 — 학부연구생</span></div>
+
+        <div class="career-block">
+          <p class="org">영남대학교 로봇공학과 로봇시스템 실험실</p>
+          <p class="meta">2025.09.01 ~ 재직중 · 학부연구생 · 기계 구조 및 로봇 시스템 관련 해석 연구</p>
+          <ul>
+            <li>기계 구조물의 구조, 열, 진동 해석 연구 수행</li>
+            <li>기존 연구 논문을 기반으로 해석 모델·조건을 재현하는 Mimic 연구 진행 — ANSYS 유한요소해석(FEA), 열-구조 연성해석, 모드해석 경험 축적</li>
+            <li>형상 정보가 부족한 장갑차 냉각수 파이프 브래킷 대상 형상 분석·3D 역설계 및 모드해석 수행</li>
+            <li>자동차 디스크 브레이크 열 하중·구조 변형 해석으로 설계 변경에 따른 성능 변화 분석</li>
+          </ul>
+        </div>
+      </section>
+
+      <div id="categories-root"></div>
+
+      <footer>
+        <p><span class="fill-in">OOO</span>, 이메일, GitHub 주소는 실제 정보로 교체하세요.</p>
+        <p>새 자격증·연구과제·어학성적·프로젝트·논문은 이 파일 안 <code>&lt;script&gt;</code> 부분의 <code>DATA</code> 목록에 항목 하나를 추가하면 카드가 자동으로 생깁니다. 새로운 카테고리를 늘리고 싶을 때도 같은 방식으로 <code>categories</code> 배열에 묶음을 하나 더 추가하면 됩니다. 자세한 방법은 script 안 주석을 참고하세요.</p>
+      </footer>
+
+    </div>
+  </main>
+</div>
+
+<script>
+/* =========================================================================
+   여기부터 내용 데이터입니다. 아래 DATA.categories 배열의 항목만 편집하면
+   화면의 카드가 자동으로 만들어집니다. HTML/CSS를 건드릴 필요는 없습니다.
+
+   [항목(item) 하나 추가하는 법]
+   원하는 카테고리의 items 배열 안에 아래 형태로 객체를 하나 더 넣으세요.
+   {
+     title: "제목",              // 필수
+     subtitle: "기관/기간/역할",  // 선택
+     meta: "날짜 등 짧은 정보",   // 선택
+     tags: ["도구1", "도구2"],   // 선택 - 사용 안 하면 []
+     body: "설명 문단",          // 선택
+     highlight: "핵심 성과 한 줄" // 선택
+   }
+   각 필드는 필요 없으면 지우거나 빈 문자열("")로 두면 됩니다.
+
+   [새 카테고리 통째로 추가하는 법]
+   아래 categories 배열 맨 끝에 콤마(,)를 찍고 이렇게 추가하세요.
+   {
+     id: "영문-고유아이디",   // 다른 카테고리와 겹치지 않게
+     label: "화면에 보일 이름",
+     note: "구분선에 들어갈 짧은 설명",
+     items: [ { title: "..." } ]
+   }
+   추가하면 사이드바 메뉴에도 자동으로 나타납니다.
+   ========================================================================= */
+
+const DATA = {
+  categories: [
+    {
+      id: "certs",
+      label: "자격증",
+      note: "취득 자격",
+      items: [
+        {
+          title: "자동차운전면허 1종 보통",
+          subtitle: "대구광역시경찰청",
+          meta: "취득일 2021.02.08"
+        }
+        // 새 자격증은 이 아래에 { ... } 형태로 콤마 찍고 추가하세요.
+      ]
+    },
+    {
+      id: "research",
+      label: "연구과제",
+      note: "해석 · 역설계 연구",
+      items: [
+        {
+          title: "장갑차 냉각수 파이프 브래킷 역설계 · 모드해석",
+          subtitle: "개인연구 · 영남대 로봇시스템 실험실",
+          tags: ["SolidWorks", "ANSYS Modal"],
+          body: "형상 정보가 부족한 부품을 대상으로 참고 논문의 형상·눈금 비율을 바탕으로 SolidWorks 3D 역설계를 진행하고, 사이드플레이트 제거·두께 축소 등 3가지 모델을 ANSYS Modal 해석으로 비교했습니다. 실제 치수·경계조건은 확보하지 못해 논문 재현 결과로는 단정하지 않고 해석의 전제와 적용 범위를 구분해 정리했습니다.",
+          highlight: "비교 모델 3종 · 고유진동수 변화 경향 확인"
+        },
+        {
+          title: "자동차 디스크 브레이크 열-구조 연성해석",
+          subtitle: "영남대 로봇시스템 실험실",
+          tags: ["ANSYS", "Thermal-Structural Coupling"],
+          body: "열 하중과 구조 변형을 함께 고려한 해석을 수행하고, 설계 변경에 따른 성능 변화를 분석했습니다."
+        }
+        // 새 연구과제는 이 아래에 추가하세요.
+      ]
+    },
+    {
+      id: "language",
+      label: "어학성적",
+      note: "공인 어학 시험",
+      items: [
+        {
+          title: "TOEIC Speaking",
+          subtitle: "YBM 한국 토익 위원회 인증완료",
+          meta: "응시일 2026.03.07",
+          highlight: "Intermediate Mid2 · 120 / 200점"
+        }
+        // 새 어학성적은 이 아래에 추가하세요.
+      ]
+    },
+    {
+      id: "projects",
+      label: "프로젝트",
+      note: "설계 · 제작 · 로봇",
+      items: [
+        {
+          title: "보유 모터 기준 휴머노이드 로봇팔 재설계",
+          subtitle: "동아리활동 · 2026.01.23 ~",
+          tags: ["SolidWorks", "3D 프린팅"],
+          body: "기존 로봇팔 자료가 보유 모터의 크기·출력에 맞지 않아 SolidWorks로 연결부·팔 길이·두께를 직접 수정했습니다. 부품 경량화와 보강이 필요한 연결부 두께 보정을 거쳐 3D프린팅으로 제작, 조립 후 실제 구동까지 확인했습니다.",
+          highlight: "금속 그리퍼 적용 대비 모터 재선정 검토 중"
+        },
+        {
+          title: "로봇 하우징 설계 · ArUco 위치추정 튜닝",
+          subtitle: "팀 프로젝트 · 2025.09 ~ 2026.06",
+          tags: ["ArUco Marker", "카메라·레이저 센서"],
+          body: "모터, 카메라·레이저 센서 배치를 고려한 베이스 프레임·브라켓을 설계·제작했습니다. 약 15개 마커 배치와 거리 실측을 통해 방산 부품 제조공장에서 2회 현장실증(회당 3~4시간)을 수행했습니다.",
+          highlight: "위치추정 오차 약 10cm → 2~3cm로 개선"
+        }
+        // 새 프로젝트는 이 아래에 추가하세요.
+      ]
+    },
+    {
+      id: "papers",
+      label: "제출 논문",
+      note: "학술 활동",
+      items: [
+        {
+          title: "예시 항목 — 실제 논문 정보로 바꾸거나 지우세요",
+          subtitle: "학술지/학회명 · 게재(예정)일",
+          body: "초록 요약이나 핵심 기여를 한두 문장으로 정리해서 넣으세요.",
+          tags: []
+        }
+        // 실제 논문이 생기면 위 예시 항목을 지우고 이 자리에 추가하세요.
+      ]
+    }
+    // 새 카테고리는 이 아래에 { id, label, note, items } 형태로 추가하세요.
+  ]
+};
+
+/* ===================== 아래부터는 렌더링 코드입니다 (수정 불필요) ===================== */
+
+function escapeHTML(str){
+  if(!str) return "";
+  return String(str)
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;");
+}
+
+function cardHTML(item){
+  const isExample = /^예시/.test(item.title || "");
+  const tagsHTML = (item.tags && item.tags.length)
+    ? `<div class="tools">${item.tags.map(t => `<span>${escapeHTML(t)}</span>`).join("")}</div>`
+    : "";
+  return `
+    <div class="card${isExample ? " is-example" : ""}">
+      <div class="title-block">
+        <span>${escapeHTML(item.subtitle)}</span>
+        <span>${escapeHTML(item.meta)}</span>
+      </div>
+      <h3>${escapeHTML(item.title)}</h3>
+      ${item.body ? `<p>${escapeHTML(item.body)}</p>` : ""}
+      ${item.highlight ? `<p class="result">${escapeHTML(item.highlight)}</p>` : ""}
+      ${tagsHTML}
+    </div>`;
+}
+
+function categorySectionHTML(cat, sheetNo){
+  const num = String(sheetNo).padStart(2, "0");
+  const itemsHTML = cat.items.map(cardHTML).join("");
+  return `
+    <section id="${cat.id}">
+      <div class="sec-head">
+        <h2>${escapeHTML(cat.label)}</h2>
+        <span class="sheet-tag">SHEET ${num}<br>${escapeHTML(cat.label).toUpperCase()}</span>
+      </div>
+      <div class="dim-divider"><span class="dim-label">${num} — ${escapeHTML(cat.note)}</span></div>
+      <div class="card-grid">${itemsHTML}</div>
+    </section>`;
+}
+
+function navItemHTML(cat, sheetNo){
+  const num = String(sheetNo).padStart(2, "0");
+  return `<li><a href="#${cat.id}"><span class="no">${num}</span>${escapeHTML(cat.label)}</a></li>`;
+}
+
+document.addEventListener("DOMContentLoaded", function(){
+  const navList = document.getElementById("nav-list");
+  const root = document.getElementById("categories-root");
+  let sheetNo = 2; // 00 소개, 01 경력 다음 번호부터 시작
+  let navHTML = "";
+  let sectionsHTML = "";
+
+  DATA.categories.forEach(function(cat){
+    navHTML += navItemHTML(cat, sheetNo);
+    sectionsHTML += categorySectionHTML(cat, sheetNo);
+    sheetNo++;
+  });
+
+  navList.insertAdjacentHTML("beforeend", navHTML);
+  root.insertAdjacentHTML("beforeend", sectionsHTML);
+});
+</script>
+
+</body>
+</html>
