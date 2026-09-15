@@ -41,7 +41,8 @@
   }
   .content{
     max-width:var(--maxw);
-    margin:0 auto;
+    margin-left:auto;
+    margin-right:48px;
   }
 
   .dim-divider{
@@ -179,6 +180,15 @@
     grid-template-columns:1fr 1fr;
     gap:18px;
   }
+
+  .research-grid{
+    grid-template-columns:1fr;
+  }
+
+  .research-grid .card{
+    min-height:220px;
+  }
+
   .card{
     background:var(--card);
     border:1px solid var(--paper-line);
@@ -512,7 +522,7 @@ function categorySectionHTML(cat, sheetNo){
         <span class="sheet-tag">SHEET ${num}<br>${escapeHTML(cat.label).toUpperCase()}</span>
       </div>
       <div class="dim-divider"><span class="dim-label">${num} — ${escapeHTML(cat.note)}</span></div>
-      <div class="card-grid">${itemsHTML}</div>
+      <div class="card-grid ${cat.id === "research" ? "research-grid" : ""}">${itemsHTML}</div>
     </section>`;
 }
 
