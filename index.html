@@ -36,6 +36,7 @@
 
   .layout{display:flex; min-height:100vh;}
   .sidebar{
+    display:none;
     position:fixed;
     top:0; left:0; bottom:0;
     width:var(--sidebar-w);
@@ -90,11 +91,11 @@
   }
 
   .main{
-    margin-left:var(--sidebar-w);
+    margin-left:0;
     padding:64px 48px 120px;
-    max-width:calc(var(--maxw) + 96px);
+    max-width:100%;
   }
-  .content{max-width:var(--maxw);}
+  .content{max-width:var(--maxw); margin:0 auto;}
 
   .dim-divider{
     position:relative;
@@ -311,11 +312,7 @@
         <p class="role-target">기계공학 · 로봇 시스템<br>엔지니어링 경험 아카이브</p>
       </div>
       <nav>
-        <ul id="nav-list">
-          <li><a href="#intro"><span class="no">00</span>소개</a></li>
-          <li><a href="#education"><span class="no">01</span>학력</a></li>
-          <li><a href="#career"><span class="no">02</span>경력</a></li>
-        </ul>
+        <ul id="nav-list"></ul>
       </nav>
     </div>
     <div class="sidebar-bottom">
