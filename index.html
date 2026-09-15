@@ -34,68 +34,15 @@
   }
   a{color:var(--blue);}
 
-  .layout{display:block; min-height:100vh;}
-  .sidebar{
-    display:none;
-    position:fixed;
-    top:0; left:0; bottom:0;
-    width:var(--sidebar-w);
-    padding:40px 28px;
-    border-right:1px solid var(--paper-line);
-    background:linear-gradient(180deg, rgba(247,245,239,0.97), rgba(247,245,239,0.9));
-    display:flex;
-    flex-direction:column;
-    justify-content:space-between;
-    overflow-y:auto;
-  }
-  .sidebar-top .mark{
-    font-family:'IBM Plex Mono', monospace;
-    font-size:0.72rem;
-    color:var(--grey);
-    letter-spacing:0.03em;
-    margin-bottom:6px;
-  }
-  .sidebar-top .role-target{
-    font-size:0.95rem;
-    font-weight:600;
-    color:var(--ink);
-    margin-bottom:32px;
-    line-height:1.5;
-  }
-  .sidebar nav ul{list-style:none; padding:0; margin:0;}
-  .sidebar nav li{margin-bottom:4px;}
-  .sidebar nav a{
-    display:flex;
-    gap:10px;
-    align-items:baseline;
-    text-decoration:none;
-    color:var(--ink-soft);
-    font-size:0.92rem;
-    padding:7px 6px;
-    border-radius:3px;
-    transition:background .15s ease, color .15s ease;
-  }
-  .sidebar nav a:hover{background:rgba(47,92,138,0.08); color:var(--blue);}
-  .sidebar nav a .no{
-    font-family:'IBM Plex Mono', monospace;
-    font-size:0.72rem;
-    color:var(--grey);
-    width:18px;
-    flex-shrink:0;
-  }
-  .sidebar-bottom{
-    font-size:0.76rem;
-    color:var(--grey);
-    border-top:1px solid var(--paper-line);
-    padding-top:16px;
-  }
-
   .main{
-    margin-left:0;
+    width:100%;
+    margin:0;
     padding:64px 48px 120px;
-    max-width:100%;
   }
-  .content{max-width:var(--maxw); margin:0 auto;}
+  .content{
+    max-width:var(--maxw);
+    margin:0 auto;
+  }
 
   .dim-divider{
     position:relative;
@@ -304,21 +251,7 @@
 </head>
 <body>
 
-<div class="layout">
-  <aside class="sidebar">
-    <div class="sidebar-top">
-      <div>
-        <p class="mark">PORTFOLIO ARCHIVE</p>
-        <p class="role-target">기계공학 · 로봇 시스템<br>엔지니어링 경험 아카이브</p>
-      </div>
-      <nav>
-        <ul id="nav-list"></ul>
-      </nav>
-    </div>
-    <div class="sidebar-bottom">
-      지원 회사에 상관없이 재사용할 수 있는<br>개인 기록 아카이브입니다.
-    </div>
-  </aside>
+  
 
   <main class="main">
     <div class="content">
@@ -395,7 +328,6 @@
 
     </div>
   </main>
-</div>
 
 <script>
 /* =========================================================================
@@ -602,7 +534,7 @@ document.addEventListener("DOMContentLoaded", function(){
     sheetNo++;
   });
 
-  navList.insertAdjacentHTML("beforeend", navHTML);
+
   root.insertAdjacentHTML("beforeend", sectionsHTML);
 });
 </script>
