@@ -519,34 +519,24 @@ const DATA = {
       note: "설계 · 해석 · 제작",
       items: [
         {
-          title: "자동차 디스크 브레이크 열-구조 연성해석",
-          subtitle: "개인 프로젝트 · 영남대 로봇시스템 실험실",
-          meta: "ANSYS · Thermal-Structural Coupling",
-          tags: ["ANSYS", "Thermal Analysis", "Static Structural", "Thermal-Structural Coupling"],
-          body: "자동차 디스크 브레이크를 대상으로 열 하중과 구조 변형을 함께 고려한 열-구조 연성해석을 수행했습니다. 정상상태 및 과도 열해석을 바탕으로 온도 분포와 변형 경향을 확인하고, 설계 조건 변화에 따른 구조 응답을 비교했습니다.",
-          highlight: "열해석 · 구조해석 · 열-구조 연성해석 수행"
-        },
-        {
           title: "장갑차 냉각수 파이프 브래킷 역설계 · 모드/정적 해석",
           subtitle: "개인 프로젝트 · 영남대 로봇시스템 실험실",
           meta: "SolidWorks · ANSYS Modal · Static Structural",
           tags: ["SolidWorks", "Reverse Engineering", "ANSYS Modal", "Static Structural"],
-          body: "형상 정보가 부족한 장갑차 냉각수 파이프 브래킷을 참고 논문 기반으로 역설계하고, 형상 변경에 따른 고유진동수와 응력 분포를 비교했습니다. 브래킷 원안(A)과 개선안(B, C)을 구성하여 모드해석과 정적 구조해석을 수행하고, 형상 변경이 진동 특성과 응력 저감에 미치는 영향을 정리했습니다.",
-          highlight: "개선안 C 기준 최대응력 255.3 MPa → 82.2 MPa 저감 · 1차 고유진동수 29.9 Hz → 17.6 Hz 비교",
+          body: "형상 정보가 제한된 장갑차 냉각수 파이프 브래킷을 대상으로, 참고 논문 속 A·B·C 형상 사진을 기준으로 형상을 대조하고 SolidWorks 3D 역설계를 수행했습니다. 이후 원안(A)과 개선안(B, C)을 모델링하여 모드해석과 정적 구조해석을 진행하고, 형상 차이가 고유진동수와 응력 분포에 미치는 영향을 비교했습니다.",
+          highlight: "참고 사진 대조 기반 3종 형상 역설계 · 개선안 C 기준 최대응력 255.3 MPa → 82.2 MPa 저감 · 1차 고유진동수 29.9 Hz → 17.6 Hz 비교",
           wide: true,
           figures: [
             { src: "bracket_installation_overview.png", caption: "논문 기반 참고 자료: 차륜형 장갑차 파워팩 냉각수 파이프와 브래킷 장착 위치" },
+            { src: "bracket_reverse_process.png", caption: "사진상 눈금과 논문 이미지를 기준으로 한 형상 추정 및 역설계 과정" },
+            { src: "bracket_boundary_process.png", caption: "하중값이 명확하지 않은 조건에서 가속도 기반으로 하중을 보정한 과정" },
             { src: "bracket_modal_comparison.png", caption: "형상별 1차 모드 비교: 모델 A 29.9 Hz, B 25.5 Hz, C 17.6 Hz" },
             { src: "bracket_static_comparison.png", caption: "정적 구조해석 비교: 모델 A 최대응력 255.3 MPa, 모델 C 최대응력 82.2 MPa" }
           ],
           models: [
-            { src: "bracket_model_A.png", caption: "Model A · 기준 형상" },
-            { src: "bracket_model_B.png", caption: "Model B · 비드 형상 적용" },
-            { src: "bracket_model_C.png", caption: "Model C · 사이드 플레이트 제거 및 형상 단순화" }
-          ],
-          videos: [
-            { src: "bracket_static_analysis.mp4", caption: "브래킷 단품 해석 영상 · 변형 및 응력 분포 확인" },
-            { src: "bracket_pipe_modal.mp4", caption: "냉각수 파이프-브래킷 어셈블리 모드해석 영상" }
+            { src: "bracket_compare_A.png", caption: "Model A · 참고 사진과 역설계 CAD 대조" },
+            { src: "bracket_compare_B.png", caption: "Model B · 참고 사진과 역설계 CAD 대조" },
+            { src: "bracket_compare_C.png", caption: "Model C · 참고 사진과 역설계 CAD 대조" }
           ],
           analysisPairs: [
             {
@@ -561,6 +551,40 @@ const DATA = {
               video: "bracket_static_C.mp4",
               caption: "개선 형상 C의 등가응력 분포와 응력 저감 결과 확인"
             }
+          ],
+          videos: [
+            { src: "bracket_static_analysis.mp4", caption: "브래킷 단품 해석 영상 · 변형 및 응력 분포 확인" },
+            { src: "bracket_pipe_modal.mp4", caption: "냉각수 파이프-브래킷 어셈블리 모드해석 영상" }
+          ]
+        },
+        {
+          title: "열해석 기초 재정리 · CFX 기반 유동/열전달 해석",
+          subtitle: "개인 프로젝트 · 브레이크 디스크 해석 전 단계",
+          meta: "ANSYS CFX · Mesh · Heat Transfer",
+          tags: ["ANSYS CFX", "Thermal Analysis", "Mesh", "Boundary Condition", "Heat Transfer"],
+          body: "브래킷 프로젝트 이후 디스크 브레이크 열-구조 연성해석으로 확장하기 전에, 열해석의 기본 입력 조건과 해석 절차를 다시 정리했습니다. 단순 형상을 대상으로 CFX Geometry, Mesh, Setup, 온도 분포 결과를 확인하며 유동·열전달 해석에서 필요한 물성, 경계조건, 결과 해석 흐름을 학습했습니다.",
+          highlight: "열해석 기초 → 경계조건 정리 → 디스크 브레이크 열-구조 연성해석으로 확장",
+          wide: true,
+          figures: [
+            { src: "thermal_cfx_foundation.png", caption: "ANSYS CFX 기반 유동/열전달 해석 기초 정리" },
+            { src: "thermal_mesh_foundation.png", caption: "단순 형상 메시 생성 및 해석 모델 준비" },
+            { src: "thermal_temperature_result.png", caption: "온도 분포 결과 확인을 통한 열해석 결과 해석 연습" }
+          ]
+        },
+        {
+          title: "자동차 디스크 브레이크 열-구조 연성해석",
+          subtitle: "개인 프로젝트 · 영남대 로봇시스템 실험실",
+          meta: "ANSYS · Thermal-Structural Coupling",
+          tags: ["ANSYS", "Thermal Analysis", "Static Structural", "Thermal-Structural Coupling"],
+          body: "열해석 기초를 마무리한 뒤, 디스크 브레이크 형상별 열-구조 연성해석으로 확장할 계획입니다. 기존에는 Full Disc와 Drilled Disc 모델을 중심으로 형상, 재료 물성, 압력, Heat Flux, 대류 열전달 계수 등 경계조건을 정리하고 초기 온도·변형 분포를 확인했습니다. 이후 열해석 조건을 보완하여 형상별 냉각 성능과 구조 변형을 비교하는 방향으로 진행할 예정입니다.",
+          highlight: "브레이크 디스크 모델링 · 압력/열유속/대류 조건 정리 · 온도/변형 분포 초기 검토",
+          wide: true,
+          figures: [
+            { src: "brake_disc_models.png", caption: "Full Disc와 Drilled Disc 모델링 결과" },
+            { src: "brake_boundary_pressure.png", caption: "제동 압력 조건 정리" },
+            { src: "brake_boundary_heatflux.png", caption: "비상 제동 조건의 Heat Flux 입력 과정" },
+            { src: "brake_temperature_result.png", caption: "비상 제동 열-구조 연성해석 초기 결과: 온도 분포" },
+            { src: "brake_deformation_result.png", caption: "비상 제동 열-구조 연성해석 초기 결과: 변형 분포" }
           ]
         },
         {
@@ -648,7 +672,7 @@ function cardHTML(item){
        </div>` : "";
   const modelsHTML = (item.models && item.models.length)
     ? `<div class="media-block">
-         <div class="media-label">CAD MODELS</div>
+         <div class="media-label">REFERENCE VS REVERSE-ENGINEERED CAD</div>
          <div class="media-grid models">${mediaFigureHTML(item.models, "img")}</div>
        </div>` : "";
   const videosHTML = (item.videos && item.videos.length)
