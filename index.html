@@ -325,6 +325,40 @@
     color:var(--ink-soft);
     line-height:1.4;
   }
+  .process-grid{
+    display:grid;
+    grid-template-columns:1fr;
+    gap:12px;
+  }
+  .process-card{
+    display:grid;
+    grid-template-columns:42% 1fr;
+    gap:16px;
+    border:1px solid var(--paper-line);
+    background:#fff;
+    padding:10px;
+    align-items:center;
+  }
+  .process-card img{
+    width:100%;
+    max-height:240px;
+    object-fit:contain;
+    background:#eef1f6;
+    border:1px solid var(--paper-line);
+    display:block;
+  }
+  .process-card h4{
+    margin:0 0 8px;
+    font-size:0.95rem;
+    color:var(--ink);
+  }
+  .process-card p{
+    margin:0;
+    font-size:0.88rem;
+    line-height:1.7;
+    color:var(--ink-soft);
+  }
+
 
 
   footer{
@@ -558,17 +592,59 @@ const DATA = {
           ]
         },
         {
-          title: "열해석 기초 재정리 · CFX 기반 유동/열전달 해석",
-          subtitle: "개인 프로젝트 · 브레이크 디스크 해석 전 단계",
-          meta: "ANSYS CFX · Mesh · Heat Transfer",
-          tags: ["ANSYS CFX", "Thermal Analysis", "Transient Thermal", "Heat Flux", "Parameter Setup", "Boundary Condition"],
-          body: "브래킷 프로젝트 이후 디스크 브레이크 열-구조 연성해석으로 확장하기 전에, 열해석의 기본 입력 조건과 해석 절차를 혼자 다시 정리했습니다. 단순 열판 형상을 대상으로 Geometry 구성, Mesh 생성, 정상상태/과도 열해석 조건 설정을 직접 수행했고, 온도·열유속 결과를 확인하며 물성값, Heat Flux, 대류 조건 등 해석 파라미터가 결과에 미치는 영향을 검토했습니다.",
-          highlight: "개인 수행 · 해석 파라미터 직접 입력 · 정상상태/과도 열해석 결과 검토",
+          title: "열해석 기초 재정리 · 열선 패턴 파라미터 해석",
+          subtitle: "개인 프로젝트 · 브레이크 디스크 해석 전 열해석 기초 검증",
+          meta: "ANSYS CFX · Steady-State Thermal · Transient Thermal",
+          tags: ["ANSYS", "Thermal Analysis", "Heat Flux", "Convection", "Radiation", "Parameter Setup", "Transient Thermal"],
+          body: "브래킷 해석 이후 디스크 브레이크 열-구조 연성해석으로 넘어가기 전에, 열해석의 기본 조건 설정 과정을 혼자 다시 정리했습니다. 단순 CFX 열전달 예제부터 시작해 열선 패턴을 직접 구성하고, Heat Flux, 대류계수, 과도 가열·냉각 시간, 복사 조건을 단계적으로 입력하면서 파라미터 변화가 온도장과 열유속 결과에 미치는 영향을 확인했습니다.",
+          highlight: "개인 수행 · 열선 패턴 직접 구성 · Heat Flux/대류/복사 조건 입력 · 정상상태/과도 열해석 비교",
           wide: true,
-          figures: [
-            { src: "thermal_cfx_foundation.png", caption: "ANSYS CFX 기반 유동/열전달 해석 기초 정리" },
-            { src: "thermal_mesh_foundation.png", caption: "단순 형상 메시 생성 및 해석 모델 준비" },
-            { src: "thermal_temperature_result.png", caption: "온도 분포 결과 확인을 통한 열해석 결과 해석 연습" }
+          processSteps: [
+            {
+              image: "thermal_cfx_model_only.png",
+              title: "CFX 기반 열전달 해석 기초 확인",
+              body: "먼저 단순 유동/열전달 모델을 통해 Geometry 구성, 입·출구 조건, 온도 분포 결과를 확인했습니다. 이후 디스크 브레이크 해석에 적용할 열전달 조건의 기본 흐름을 정리했습니다."
+            },
+            {
+              image: "thermal_cfx_mesh_only.png",
+              title: "메시와 경계면 설정",
+              body: "해석 대상 형상에 대해 Mesh를 생성하고, 열전달이 적용되는 면과 결과를 확인할 단면을 구분했습니다. 경계면을 명확히 지정하는 과정을 통해 이후 열선 모델의 Face 조건 설정으로 연결했습니다."
+            },
+            {
+              image: "thermal_cfx_temperature_only.png",
+              title: "기초 온도 분포 결과 확인",
+              body: "단순 열전달 모델에서 온도 구배가 형상 내부에 어떻게 형성되는지 확인했습니다. 이 단계는 열해석 결과를 읽는 기준을 잡기 위한 기초 검증 과정입니다."
+            },
+            {
+              image: "thermal_wire_model_only.png",
+              title: "열선 패턴 직접 구성",
+              body: "SolidWorks에서 판 윗면을 열선 패턴 형태로 분할하고, Mechanical에서 별도 Face로 선택할 수 있도록 구성했습니다. 별도 열선 재료를 만들지 않고, 분리된 면에 총 열량을 입력하는 방식으로 기본 열전달을 확인했습니다."
+            },
+            {
+              image: "thermal_steady_flow_diagram.png",
+              title: "정상상태 열해석 조건 입력",
+              body: "열선 영역에 Heat Flow 30 W를 입력하고, 재료는 Al6061로 설정했습니다. 외부 표면에는 대류 조건 h=10과 주변온도 25℃를 적용해 입력열과 방출열이 균형을 이루는 정상상태를 확인했습니다."
+            },
+            {
+              image: "thermal_parameter_compare_only.png",
+              title: "Heat Flow와 대류계수 변화 비교",
+              body: "Heat Flow를 30 W, 50 W, 70 W로 바꾸고, 대류계수 h를 5, 10, 25 W/m²K로 조정하면서 최고온도와 냉각 성능이 어떻게 달라지는지 비교하도록 해석 조건을 구성했습니다."
+            },
+            {
+              image: "thermal_transient_graph_only.png",
+              title: "과도 가열·냉각 조건 구성",
+              body: "열선 ON/OFF 조건을 시간에 따라 나누고, 100℃ 및 200℃까지 가열 후 냉각되는 과정을 비교했습니다. 이 과정에서 시간에 따른 온도 변화와 주변온도 25℃ 도달 시간을 확인하는 방향으로 해석을 구성했습니다."
+            },
+            {
+              image: "thermal_radiation_compare_only.png",
+              title: "복사 조건 추가",
+              body: "전도와 대류만 적용한 결과에 복사 조건을 추가해 비교했습니다. 고온 영역에서 복사 열전달 영향이 커질 수 있기 때문에 최고온도, 냉각시간, 온도 분포 변화를 비교하는 흐름으로 정리했습니다."
+            },
+            {
+              image: "thermal_parameter_input_result_only.png",
+              title: "파라미터 입력 화면과 결과 비교",
+              body: "ANSYS Details 창에서 Heat Flux, Convection, Ambient Temperature를 직접 입력하고, 30 W/mm²와 50 W/mm² 조건의 온도 결과를 비교했습니다. 파라미터 변화에 따라 최고온도와 평균온도가 어떻게 달라지는지 확인했습니다."
+            }
           ],
           videos: [
             { src: "brake_parameter_analysis.mp4", caption: "정상상태 열해석 영상 · 파라미터 입력 후 온도 분포 확인" },
@@ -685,6 +761,21 @@ function cardHTML(item){
          <div class="media-label">VIDEO MATERIALS</div>
          <div class="media-grid videos">${mediaFigureHTML(item.videos, "video")}</div>
        </div>` : "";
+  const processStepsHTML = (item.processSteps && item.processSteps.length)
+    ? `<div class="media-block">
+         <div class="media-label">PROCESS EVIDENCE</div>
+         <div class="process-grid">
+           ${item.processSteps.map(s => `
+             <div class="process-card">
+               <img src="${encodeURI(s.image)}" alt="${escapeHTML(s.title)}">
+               <div>
+                 <h4>${escapeHTML(s.title)}</h4>
+                 <p>${escapeHTML(s.body)}</p>
+               </div>
+             </div>
+           `).join("")}
+         </div>
+       </div>` : "";
   const analysisPairsHTML = (item.analysisPairs && item.analysisPairs.length)
     ? `<div class="media-block">
          <div class="media-label">STATIC STRUCTURAL RESULTS</div>
@@ -709,6 +800,7 @@ function cardHTML(item){
       ${item.body ? `<p>${escapeHTML(item.body)}</p>` : ""}
       ${item.highlight ? `<p class="result">${escapeHTML(item.highlight)}</p>` : ""}
       ${figuresHTML}
+      ${processStepsHTML}
       ${modelsHTML}
       ${analysisPairsHTML}
       ${videosHTML}
