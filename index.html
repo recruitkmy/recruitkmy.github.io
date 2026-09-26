@@ -18,7 +18,7 @@
     --orange:#c1502e;
     --grey:#8b8f8a;
     --card:#fffefb;
-    --maxw:760px;
+    --maxw:1160px;
     --sidebar-w:252px;
   }
   *{box-sizing:border-box;}
@@ -245,39 +245,85 @@
     grid-column:1 / -1;
   }
   .media-block{
-    margin-top:18px;
+    margin-top:16px;
   }
   .media-label{
     font-family:'IBM Plex Mono', monospace;
     font-size:0.72rem;
     color:var(--grey);
-    margin:16px 0 8px;
+    margin:14px 0 8px;
   }
   .media-grid{
     display:grid;
-    grid-template-columns:repeat(2, minmax(0, 1fr));
+    grid-template-columns:repeat(3, minmax(0, 1fr));
     gap:12px;
   }
   .media-grid.models{
     grid-template-columns:repeat(3, minmax(0, 1fr));
   }
+  .media-grid.videos{
+    grid-template-columns:repeat(2, minmax(0, 1fr));
+  }
+  .analysis-pair-grid{
+    display:grid;
+    grid-template-columns:repeat(2, minmax(0, 1fr));
+    gap:14px;
+    margin-top:8px;
+  }
+  .analysis-pair{
+    border:1px solid var(--paper-line);
+    background:#fff;
+    padding:10px;
+  }
+  .analysis-pair h4{
+    margin:0 0 8px;
+    font-size:0.92rem;
+    color:var(--ink);
+  }
+  .analysis-pair img,
+  .analysis-pair video{
+    width:100%;
+    height:220px;
+    object-fit:contain;
+    display:block;
+    background:#eef1f6;
+    border:1px solid var(--paper-line);
+  }
+  .analysis-pair video{
+    margin-top:8px;
+  }
+  .analysis-pair .pair-caption{
+    margin-top:7px;
+    font-size:0.76rem;
+    color:var(--ink-soft);
+    line-height:1.4;
+  }
+
   .media-item{
     margin:0;
     border:1px solid var(--paper-line);
     background:#fff;
     padding:8px;
   }
-  .media-item img,
+  .media-item img{
+    width:100%;
+    height:180px;
+    object-fit:contain;
+    display:block;
+    background:#eef1f6;
+  }
   .media-item video{
     width:100%;
+    height:230px;
+    object-fit:contain;
     display:block;
     background:#eef1f6;
   }
   .media-item figcaption{
     margin-top:7px;
-    font-size:0.78rem;
+    font-size:0.76rem;
     color:var(--ink-soft);
-    line-height:1.45;
+    line-height:1.4;
   }
 
 
@@ -491,6 +537,20 @@ const DATA = {
           videos: [
             { src: "bracket_static_analysis.mp4", caption: "브래킷 단품 해석 영상 · 변형 및 응력 분포 확인" },
             { src: "bracket_pipe_modal.mp4", caption: "냉각수 파이프-브래킷 어셈블리 모드해석 영상" }
+          ],
+          analysisPairs: [
+            {
+              label: "Model A · 정적 구조해석",
+              image: "bracket_static_A.png",
+              video: "bracket_static_A.mp4",
+              caption: "기준 형상 A의 등가응력 분포와 최대응력 위치 확인"
+            },
+            {
+              label: "Model C · 정적 구조해석",
+              image: "bracket_static_C.png",
+              video: "bracket_static_C.mp4",
+              caption: "개선 형상 C의 등가응력 분포와 응력 저감 결과 확인"
+            }
           ]
         },
         {
@@ -584,7 +644,21 @@ function cardHTML(item){
   const videosHTML = (item.videos && item.videos.length)
     ? `<div class="media-block">
          <div class="media-label">VIDEO MATERIALS</div>
-         <div class="media-grid">${mediaFigureHTML(item.videos, "video")}</div>
+         <div class="media-grid videos">${mediaFigureHTML(item.videos, "video")}</div>
+       </div>` : "";
+  const analysisPairsHTML = (item.analysisPairs && item.analysisPairs.length)
+    ? `<div class="media-block">
+         <div class="media-label">STATIC STRUCTURAL RESULTS</div>
+         <div class="analysis-pair-grid">
+           ${item.analysisPairs.map(p => `
+             <div class="analysis-pair">
+               <h4>${escapeHTML(p.label)}</h4>
+               <img src="${encodeURI(p.image)}" alt="${escapeHTML(p.label)}">
+               <video controls preload="metadata" src="${encodeURI(p.video)}"></video>
+               ${p.caption ? `<div class="pair-caption">${escapeHTML(p.caption)}</div>` : ""}
+             </div>
+           `).join("")}
+         </div>
        </div>` : "";
   return `
     <div class="card${isExample ? " is-example" : ""}${item.wide ? " is-wide" : ""}">
@@ -597,6 +671,7 @@ function cardHTML(item){
       ${item.highlight ? `<p class="result">${escapeHTML(item.highlight)}</p>` : ""}
       ${figuresHTML}
       ${modelsHTML}
+      ${analysisPairsHTML}
       ${videosHTML}
       ${tagsHTML}
     </div>`;
