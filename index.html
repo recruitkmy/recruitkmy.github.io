@@ -561,14 +561,18 @@ const DATA = {
           title: "열해석 기초 재정리 · CFX 기반 유동/열전달 해석",
           subtitle: "개인 프로젝트 · 브레이크 디스크 해석 전 단계",
           meta: "ANSYS CFX · Mesh · Heat Transfer",
-          tags: ["ANSYS CFX", "Thermal Analysis", "Mesh", "Boundary Condition", "Heat Transfer"],
-          body: "브래킷 프로젝트 이후 디스크 브레이크 열-구조 연성해석으로 확장하기 전에, 열해석의 기본 입력 조건과 해석 절차를 다시 정리했습니다. 단순 형상을 대상으로 CFX Geometry, Mesh, Setup, 온도 분포 결과를 확인하며 유동·열전달 해석에서 필요한 물성, 경계조건, 결과 해석 흐름을 학습했습니다.",
-          highlight: "열해석 기초 → 경계조건 정리 → 디스크 브레이크 열-구조 연성해석으로 확장",
+          tags: ["ANSYS CFX", "Thermal Analysis", "Transient Thermal", "Heat Flux", "Parameter Setup", "Boundary Condition"],
+          body: "브래킷 프로젝트 이후 디스크 브레이크 열-구조 연성해석으로 확장하기 전에, 열해석의 기본 입력 조건과 해석 절차를 혼자 다시 정리했습니다. 단순 열판 형상을 대상으로 Geometry 구성, Mesh 생성, 정상상태/과도 열해석 조건 설정을 직접 수행했고, 온도·열유속 결과를 확인하며 물성값, Heat Flux, 대류 조건 등 해석 파라미터가 결과에 미치는 영향을 검토했습니다.",
+          highlight: "개인 수행 · 해석 파라미터 직접 입력 · 정상상태/과도 열해석 결과 검토",
           wide: true,
           figures: [
             { src: "thermal_cfx_foundation.png", caption: "ANSYS CFX 기반 유동/열전달 해석 기초 정리" },
             { src: "thermal_mesh_foundation.png", caption: "단순 형상 메시 생성 및 해석 모델 준비" },
             { src: "thermal_temperature_result.png", caption: "온도 분포 결과 확인을 통한 열해석 결과 해석 연습" }
+          ],
+          videos: [
+            { src: "brake_parameter_analysis.mp4", caption: "정상상태 열해석 영상 · 파라미터 입력 후 온도 분포 확인" },
+            { src: "heatplate_thermal_result.mp4", caption: "과도 열해석 영상 · Heat Flux 결과 변화 확인" }
           ]
         },
         {
@@ -576,13 +580,14 @@ const DATA = {
           subtitle: "개인 프로젝트 · 영남대 로봇시스템 실험실",
           meta: "ANSYS · Thermal-Structural Coupling",
           tags: ["ANSYS", "Thermal Analysis", "Static Structural", "Thermal-Structural Coupling"],
-          body: "열해석 기초를 마무리한 뒤, 디스크 브레이크 형상별 열-구조 연성해석으로 확장할 계획입니다. 기존에는 Full Disc와 Drilled Disc 모델을 중심으로 형상, 재료 물성, 압력, Heat Flux, 대류 열전달 계수 등 경계조건을 정리하고 초기 온도·변형 분포를 확인했습니다. 이후 열해석 조건을 보완하여 형상별 냉각 성능과 구조 변형을 비교하는 방향으로 진행할 예정입니다.",
-          highlight: "브레이크 디스크 모델링 · 압력/열유속/대류 조건 정리 · 온도/변형 분포 초기 검토",
+          body: "열해석 기초를 마무리한 뒤, 디스크 브레이크 형상별 열-구조 연성해석으로 확장할 계획입니다. 기존에는 Full Disc와 Drilled Disc 모델을 중심으로 형상과 재료 물성을 정리하고, 제동 압력 조건, 시간별 Heat Flux 곡선, 표면별 대류 열전달 계수를 직접 계산·입력하는 과정을 검토했습니다. 이후 온도 분포와 변형 분포를 초기 확인했으며, 해석 조건을 보완하여 형상별 냉각 성능과 구조 변형을 비교하는 방향으로 진행할 예정입니다.",
+          highlight: "Heat Flux 곡선 입력 · 표면별 대류 열전달 계수 도출 · 온도/변형 분포 초기 검토",
           wide: true,
           figures: [
             { src: "brake_disc_models.png", caption: "Full Disc와 Drilled Disc 모델링 결과" },
             { src: "brake_boundary_pressure.png", caption: "제동 압력 조건 정리" },
-            { src: "brake_boundary_heatflux.png", caption: "비상 제동 조건의 Heat Flux 입력 과정" },
+            { src: "brake_boundary_heatflux.png", caption: "비상 제동 조건의 시간별 Heat Flux 곡선 입력 과정" },
+            { src: "brake_convection_coefficient.png", caption: "회전 조건을 고려한 표면별 대류 열전달 계수 산정 과정" },
             { src: "brake_temperature_result.png", caption: "비상 제동 열-구조 연성해석 초기 결과: 온도 분포" },
             { src: "brake_deformation_result.png", caption: "비상 제동 열-구조 연성해석 초기 결과: 변형 분포" }
           ]
