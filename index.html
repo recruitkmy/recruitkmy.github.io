@@ -565,57 +565,12 @@ const DATA = {
           ]
         },
         {
-          title: "열해석 기초 재정리 · 열선 패턴 파라미터 해석",
-          subtitle: "개인 프로젝트 · 브레이크 디스크 해석 전 단계",
-          meta: "ANSYS CFX · Steady-State Thermal · Transient Thermal",
-          tags: ["ANSYS", "Thermal Analysis", "Heat Flux", "Convection", "Radiation", "Parameter Setup", "Transient Thermal"],
-          body: "브래킷 해석 이후 디스크 브레이크 열-구조 연성해석으로 넘어가기 전에, 열해석 조건 설정을 혼자 다시 정리했습니다. 기본 모델은 200 × 100 × 5 mm 크기의 Al6061 판으로 설정하고, 판 윗면에 U자형 반복 열선 패턴을 스케치한 뒤 면 분할하여 ANSYS에서 S_HEATER 영역으로 선택할 수 있도록 구성했습니다. 열선 고체를 별도로 만들지 않고 분리된 표면에 Heat Flow를 입력하는 방식으로 단순화하여, Heat Flux·대류계수·과도 가열/냉각 조건을 직접 입력하고 Design Points로 결과값을 비교했습니다.",
-          highlight: "개인 수행 · 200×100×5mm Al6061 판 · U자형 열선 패턴 면 분할 · S_HEATER 설정 · Design Points 결과 비교",
-          wide: true,
-          evidenceSteps: [
-            {
-              image: "thermal_cfx_foundation.png",
-              title: "CFX 열전달 해석 기초 확인",
-              body: "먼저 단순 유동/열전달 예제를 통해 열해석의 기본 흐름을 확인했습니다. 형상 구성, 경계조건 입력, 메시 생성, 온도 결과 확인 순서를 정리한 뒤 열선 패턴 모델 해석으로 확장했습니다."
-            },
-            {
-              image: "thermal_mesh_foundation.png",
-              title: "메시와 해석 대상 형상 확인",
-              body: "단순 형상에 대해 메시를 생성하고 열전달이 발생하는 영역을 구분했습니다. 이 단계에서 경계면을 어떻게 지정해야 하는지 정리해 열선 패턴의 Face 조건 입력으로 연결했습니다."
-            },
-            {
-              image: "thermal_temperature_result.png",
-              title: "기초 온도 분포 결과 확인",
-              body: "해석 결과에서 온도 구배가 형상 내부에 어떻게 나타나는지 확인했습니다. 이후 브레이크 디스크 해석에서 온도 분포와 냉각 경향을 해석하기 위한 기초 확인 단계입니다."
-            },
-            {
-              image: "thermal_heater_pattern_surface.png",
-              title: "열선 기본 모델링 조건",
-              body: "기본 형상은 200 × 100 × 5 mm 크기의 Al6061 판으로 설정했습니다. 판 윗면에 U자형 반복 열선 패턴을 직접 스케치하고, 파란색 열선 영역을 별도 Face로 분할해 ANSYS에서 S_HEATER Named Selection으로 선택할 수 있게 만들었습니다. 열선 고체를 따로 만들지 않고 표면 Heat Flow를 입력하는 방식으로 단순화했습니다."
-            },
-            {
-              image: "thermal_parameter_outline.png",
-              title: "입력 파라미터 직접 정의",
-              body: "Steady-State Thermal 해석에서 Convection Film Coefficient, Convection Ambient Temperature, Heat Flow Magnitude를 입력 파라미터로 직접 정의했습니다. 동시에 Temperature Average/Maximum/Minimum과 Total Heat Flux Minimum/Maximum/Average를 출력 파라미터로 설정해 조건 변화에 따른 결과를 체계적으로 비교할 수 있도록 구성했습니다."
-            },
-            {
-              image: "thermal_design_points_table.png",
-              title: "Design Points 기반 결과 비교",
-              body: "입력 파라미터 조합을 바꿔가며 Design Points를 생성하고, 각 조건에서 평균온도·최고온도·최저온도와 Total Heat Flux 결과값을 표 형태로 정리했습니다. 즉 단일 해석 화면만 제시한 것이 아니라, 파라미터를 직접 넣고 결과값을 비교하는 방식으로 해석을 수행했다는 점을 보여주는 자료입니다."
-            }
-          ],
-          videos: [
-            { src: "brake_parameter_analysis.mp4", caption: "정상상태 열해석 영상 · 파라미터 입력 후 온도 분포 확인" },
-            { src: "heatplate_thermal_result.mp4", caption: "과도 열해석 영상 · Heat Flux 결과 변화 확인" }
-          ]
-        },
-        {
-          title: "자동차 디스크 브레이크 형상 모델링",
-          subtitle: "개인 프로젝트 · 논문 기반 형상 모델링",
-          meta: "SolidWorks · Brake Disc Modeling · CFX 검토",
-          tags: ["SolidWorks", "Brake Disc", "Modeling", "ANSYS CFX"],
-          body: "참고 논문 ‘디스크 브레이크 경량화와 성능 향상을 위한 형상 최적 설계’를 기준으로 디스크 브레이크 형상 4종을 직접 모델링했습니다. 해석 결과를 완성했다고 쓰기보다는, 현재는 논문 형상과 직접 모델링한 CAD 형상을 대조하고 CFX 유동/열전달 해석을 시도한 단계로 정리했습니다.",
-          highlight: "논문 기준 A~D 형상 직접 모델링 · Full / Drilled / Slotted / Drilled with Side Groove · CFX 해석 시도",
+          title: "자동차 디스크 브레이크 형상 모델링 및 열해석 기초 검증",
+          subtitle: "개인 프로젝트 · 논문 기반 형상 모델링 / 열해석 조건 검토",
+          meta: "SolidWorks · ANSYS Thermal · ANSYS CFX",
+          tags: ["SolidWorks", "Brake Disc", "Thermal Analysis", "Parameter Setup", "ANSYS CFX"],
+          body: "참고 논문 ‘디스크 브레이크 경량화와 성능 향상을 위한 형상 최적 설계’를 기준으로 디스크 브레이크 형상 4종을 직접 모델링했습니다. 이후 브레이크 디스크 열-구조 연성해석으로 확장하기 전, 200 × 100 × 5 mm Al6061 판에 U자형 열선 패턴을 구성하여 Heat Flow, 대류계수, 과도 가열·냉각 조건을 직접 입력하고 Design Points로 결과값을 비교했습니다. 디스크 브레이크 형상은 CFX 유동/열전달 해석까지 연결하기 위해 메시, 유동 영역, 경계조건 설정을 시도한 단계로 정리했습니다.",
+          highlight: "A~D 디스크 형상 모델링 · 열선 패턴 파라미터 해석 · CFX 메시/경계조건 설정 시도",
           wide: true,
           models: [
             { src: "brake_disc_compare_A.png", caption: "Model A · Full Disc Brake" },
@@ -625,35 +580,58 @@ const DATA = {
           ],
           evidenceSteps: [
             {
+              image: "thermal_cfx_foundation.png",
+              title: "CFX 열전달 해석 기초 확인",
+              body: "단순 유동/열전달 예제를 통해 형상 구성, 경계조건 입력, 메시 생성, 온도 결과 확인 순서를 정리했습니다."
+            },
+            {
+              image: "thermal_temperature_result.png",
+              title: "기초 온도 분포 결과 확인",
+              body: "해석 결과에서 온도 구배가 형상 내부에 어떻게 나타나는지 확인하고, 브레이크 디스크 해석에서 온도 분포와 냉각 경향을 읽기 위한 기준을 잡았습니다."
+            },
+            {
+              image: "thermal_heater_pattern_surface.png",
+              title: "열선 기본 모델링 조건",
+              body: "200 × 100 × 5 mm Al6061 판 윗면에 U자형 반복 열선 패턴을 직접 스케치하고, 열선 영역을 S_HEATER Named Selection으로 선택할 수 있게 면 분할했습니다."
+            },
+            {
+              image: "thermal_parameter_outline.png",
+              title: "입력 파라미터 직접 정의",
+              body: "Convection Film Coefficient, Convection Ambient Temperature, Heat Flow Magnitude를 입력 파라미터로 정의하고, Temperature와 Total Heat Flux 결과값을 출력 파라미터로 설정했습니다."
+            },
+            {
+              image: "thermal_design_points_table.png",
+              title: "Design Points 기반 결과 비교",
+              body: "입력 파라미터 조합을 바꿔가며 평균온도, 최고온도, 최저온도, Total Heat Flux 결과값을 표 형태로 비교했습니다."
+            },
+            {
               image: "brake_cfx_mesh_attempt.png",
               title: "CFX 메시 검토 시도",
-              body: "디스크 내부 벤트와 유동 통로 주변에 메시가 형성되는지 확인했습니다. 복잡한 냉각 채널 형상 때문에 국부 메시 품질과 유동 영역 설정을 계속 조정해야 하는 단계로 정리했습니다."
+              body: "디스크 내부 벤트와 유동 통로 주변에 메시가 형성되는지 확인했습니다. 복잡한 냉각 채널 형상 때문에 국부 메시 품질과 유동 영역 설정을 조정해야 하는 단계로 정리했습니다."
             },
             {
               image: "brake_cfx_model_attempt.png",
               title: "CFX 모델 불러오기 및 유동 영역 확인",
-              body: "SolidWorks에서 만든 디스크 형상을 CFX 환경으로 가져와 유동 영역과 벤트 구조를 확인했습니다. 형상은 구성했지만, 실제 유동 해석까지 안정적으로 연결하기 위해서는 영역 분리와 경계조건 정리가 추가로 필요했습니다."
+              body: "SolidWorks에서 만든 디스크 형상을 CFX 환경으로 가져와 유동 영역과 벤트 구조를 확인했습니다."
             },
             {
               image: "brake_cfx_boundary_attempt.png",
               title: "CFX 경계조건 설정 시도",
-              body: "디스크 주변 유동 영역에 입·출구 방향과 벽면 조건을 적용해 보며 강제대류 조건을 검토했습니다. 브레이크 디스크 열해석으로 확장하기 위한 사전 시도 자료로 정리했습니다."
+              body: "디스크 주변 유동 영역에 입·출구 방향과 벽면 조건을 적용해 보며 강제대류 조건을 검토했습니다."
             }
+          ],
+          videos: [
+            { src: "brake_parameter_analysis.mp4", caption: "정상상태 열해석 영상 · 파라미터 입력 후 온도 분포 확인" },
+            { src: "heatplate_thermal_result.mp4", caption: "과도 열해석 영상 · Heat Flux 결과 변화 확인" }
           ]
         },
         {
-          title: "보유 모터 기준 휴머노이드 로봇팔 재설계",
-          subtitle: "동아리활동 · 2026.01.23 ~",
-          tags: ["SolidWorks", "3D 프린팅"],
-          body: "기존 로봇팔 자료가 보유 모터의 크기·출력에 맞지 않아 SolidWorks로 연결부·팔 길이·두께를 직접 수정했습니다. 부품 경량화와 보강이 필요한 연결부 두께 보정을 거쳐 3D프린팅으로 제작, 조립 후 실제 구동까지 확인했습니다.",
-          highlight: "금속 그리퍼 적용 대비 모터 재선정 검토 중"
-        },
-        {
-          title: "로봇 하우징 설계 · ArUco 위치추정 튜닝",
-          subtitle: "팀 프로젝트 · 2025.09 ~ 2026.06",
-          tags: ["ArUco Marker", "카메라·레이저 센서"],
-          body: "모터, 카메라·레이저 센서 배치를 고려한 베이스 프레임·브라켓을 설계·제작했습니다. 약 15개 마커 배치와 거리 실측을 통해 방산 부품 제조공장에서 2회 현장실증(회당 3~4시간)을 수행했습니다.",
-          highlight: "위치추정 오차 약 10cm → 2~3cm로 개선"
+          title: "캡스톤 프로젝트 · 팬·틸트 터렛 및 로봇 하우징 제작",
+          subtitle: "팀 프로젝트 · 영남대학교",
+          meta: "2025.09.01 ~ 2026.06.22 · 하우징 제작 담당",
+          tags: ["Pan/Tilt", "Housing Design", "Sensor Mount", "Bracket", "Robot Mechanism"],
+          body: "소형 이동 객체 대응을 위한 영상 기반 팬·틸트 터렛 시스템 제작에 참여하고, 모터와 카메라·레이저 센서 배치를 고려한 베이스 프레임과 브라켓을 설계·제작했습니다. 팬·틸트 구동부와 센서 모듈이 안정적으로 장착될 수 있도록 구조 배치, 조립성, 센서 시야 확보 조건을 고려해 하우징을 구성했습니다.",
+          highlight: "팬·틸트 터렛 제작 · 베이스 프레임 및 센서 브라켓 설계·제작"
         }
       ]
     },
@@ -739,25 +717,19 @@ const DATA = {
     {
       id: "activities",
       label: "학내외활동",
-      note: "동아리 · 팀 프로젝트 · 창업 활동",
+      note: "동아리 · 창업 활동",
       items: [
         {
-          title: "로봇팔 설계 동아리활동",
-          subtitle: "영남대학교",
+          title: "보유 모터 기준 휴머노이드 로봇팔 재설계",
+          subtitle: "동아리활동",
           meta: "2026.01.23 ~ · 로봇 팔 설계 담당",
-          body: "로봇팔 모델을 분석한 후 보유 모터의 크기와 출력 조건에 맞게 구조 및 치수를 재설계하고, 부품 제작·조립 과정을 통해 실제 구동 가능한 로봇팔 시스템을 구현했습니다.",
-          tags: ["Robot Arm", "SolidWorks", "3D Printing", "Assembly"]
+          body: "기존 로봇팔 자료가 보유 모터의 크기·출력에 맞지 않아 SolidWorks로 연결부·팔 길이·두께를 직접 수정했습니다. 부품 경량화와 보강이 필요한 연결부 두께 보정을 거쳐 3D프린팅으로 제작, 조립 후 실제 구동까지 확인했습니다.",
+          highlight: "금속 그리퍼 적용 대비 모터 재선정 검토 중",
+          tags: ["SolidWorks", "3D 프린팅"]
         },
         {
-          title: "로봇 구동부·센서 모듈 하우징 제작",
-          subtitle: "영남대학교 팀 프로젝트",
-          meta: "2025.09.01 ~ 2026.06.22 · 하우징 제작 담당",
-          body: "로봇 구동부 및 센서 모듈 장착을 위한 베이스 프레임과 브라켓을 설계·제작했습니다. 모터와 카메라·레이저 센서의 배치 조건을 고려한 구조 설계와 조립 과정을 수행하며 로봇 기구 설계 경험을 쌓았습니다.",
-          tags: ["Housing Design", "Sensor Mount", "Bracket", "Robot Mechanism"]
-        },
-        {
-          title: "AI 창업 컨설팅 프로그램 창업 아이템 기획",
-          subtitle: "ModuArm · 다관절 서보모터 기반 모듈형 로봇팔 시스템",
+          title: "ModuArm 모듈형 로봇팔 창업 아이템 기획",
+          subtitle: "2026년 AI 창업 컨설팅 지원·창업지원 프로그램",
           meta: "2026.08 · 대표학생",
           body: "서보모터, 3D 프린팅 링크 구조, 그리퍼를 결합한 교육·연구·경량 자동화용 모듈형 로봇팔 플랫폼을 창업 아이템으로 기획했습니다. 관절별 각도 제어, DH 파라미터 기반 기구학, 순기구학·역기구학 기반 위치 제어, RGB/RGB-D 카메라 및 AI 객체 인식 기반 자동 파지 기능 확장 계획을 정리했습니다.",
           highlight: "창업 아이템 기획 · 모듈형 로봇팔 플랫폼 · AI 객체 인식 기반 확장 계획",
