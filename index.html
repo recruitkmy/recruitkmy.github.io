@@ -602,14 +602,9 @@ const DATA = {
           wide: true,
           evidenceSteps: [
             {
-              image: "thermal_heater_pattern_surface.png",
-              title: "열선 기본 모델링 조건",
-              body: "기본 형상은 200 × 100 × 5 mm 크기의 Al6061 판으로 설정했습니다. 판 윗면에 U자형 반복 열선 패턴을 직접 스케치하고, 파란색 열선 영역을 별도 Face로 분할해 ANSYS에서 S_HEATER Named Selection으로 선택할 수 있게 만들었습니다. 열선 고체를 따로 만들지 않고 표면 Heat Flow를 입력하는 방식으로 단순화했습니다."
-            },
-            {
               image: "thermal_cfx_foundation.png",
               title: "CFX 열전달 해석 기초 확인",
-              body: "먼저 단순 유동/열전달 예제를 통해 열해석의 기본 흐름을 확인했습니다. 이후 200 × 100 × 5 mm Al6061 판 모델을 기준으로 열선 면을 분리하고, S_HEATER 영역에 열 입력을 주는 방식으로 직접 모델링한 열선 해석으로 확장했습니다."
+              body: "먼저 단순 유동/열전달 예제를 통해 열해석의 기본 흐름을 확인했습니다. 형상 구성, 경계조건 입력, 메시 생성, 온도 결과 확인 순서를 정리한 뒤 열선 패턴 모델 해석으로 확장했습니다."
             },
             {
               image: "thermal_mesh_foundation.png",
@@ -621,6 +616,12 @@ const DATA = {
               title: "기초 온도 분포 결과 확인",
               body: "해석 결과에서 온도 구배가 형상 내부에 어떻게 나타나는지 확인했습니다. 이후 브레이크 디스크 해석에서 온도 분포와 냉각 경향을 해석하기 위한 기초 확인 단계입니다."
             },
+            {
+              image: "thermal_heater_pattern_surface.png",
+              title: "열선 기본 모델링 조건",
+              body: "기본 형상은 200 × 100 × 5 mm 크기의 Al6061 판으로 설정했습니다. 판 윗면에 U자형 반복 열선 패턴을 직접 스케치하고, 파란색 열선 영역을 별도 Face로 분할해 ANSYS에서 S_HEATER Named Selection으로 선택할 수 있게 만들었습니다. 열선 고체를 따로 만들지 않고 표면 Heat Flow를 입력하는 방식으로 단순화했습니다."
+            },
+
             {
               image: "thermal_parameter_outline.png",
               title: "입력 파라미터 직접 정의",
@@ -640,16 +641,33 @@ const DATA = {
         {
           title: "자동차 디스크 브레이크 형상 모델링",
           subtitle: "개인 프로젝트 · 논문 기반 형상 모델링",
-          meta: "SolidWorks · Brake Disc Modeling",
-          tags: ["SolidWorks", "Brake Disc", "Modeling"],
-          body: "참고 논문 ‘디스크 브레이크 경량화와 성능 향상을 위한 형상 최적 설계’를 기준으로 디스크 브레이크 형상 4종을 직접 모델링했습니다. 포트폴리오에는 논문 형상과 제가 모델링한 CAD 형상을 대조하는 자료만 정리했습니다.",
-          highlight: "논문 기준 A~D 형상 직접 모델링 · Full / Drilled / Slotted / Drilled with Side Groove",
+          meta: "SolidWorks · Brake Disc Modeling · CFX 검토",
+          tags: ["SolidWorks", "Brake Disc", "Modeling", "ANSYS CFX"],
+          body: "참고 논문 ‘디스크 브레이크 경량화와 성능 향상을 위한 형상 최적 설계’를 기준으로 디스크 브레이크 형상 4종을 직접 모델링했습니다. 해석 결과를 완성했다고 쓰기보다는, 현재는 논문 형상과 직접 모델링한 CAD 형상을 대조하고 CFX 유동/열전달 해석을 시도한 단계로 정리했습니다.",
+          highlight: "논문 기준 A~D 형상 직접 모델링 · Full / Drilled / Slotted / Drilled with Side Groove · CFX 해석 시도",
           wide: true,
           models: [
             { src: "brake_disc_compare_A.png", caption: "Model A · Full Disc Brake" },
             { src: "brake_disc_compare_B.png", caption: "Model B · Drilled Disc Brake" },
             { src: "brake_disc_compare_C.png", caption: "Model C · Slotted Disc Brake" },
             { src: "brake_disc_compare_D.png", caption: "Model D · Drilled with Side Groove Disc Brake" }
+          ],
+          evidenceSteps: [
+            {
+              image: "brake_cfx_mesh_attempt.png",
+              title: "CFX 메시 검토 시도",
+              body: "디스크 내부 벤트와 유동 통로 주변에 메시가 형성되는지 확인했습니다. 복잡한 냉각 채널 형상 때문에 국부 메시 품질과 유동 영역 설정을 계속 조정해야 하는 단계로 정리했습니다."
+            },
+            {
+              image: "brake_cfx_model_attempt.png",
+              title: "CFX 모델 불러오기 및 유동 영역 확인",
+              body: "SolidWorks에서 만든 디스크 형상을 CFX 환경으로 가져와 유동 영역과 벤트 구조를 확인했습니다. 형상은 구성했지만, 실제 유동 해석까지 안정적으로 연결하기 위해서는 영역 분리와 경계조건 정리가 추가로 필요했습니다."
+            },
+            {
+              image: "brake_cfx_boundary_attempt.png",
+              title: "CFX 경계조건 설정 시도",
+              body: "디스크 주변 유동 영역에 입·출구 방향과 벽면 조건을 적용해 보며 강제대류 조건을 검토했습니다. 브레이크 디스크 열해석으로 확장하기 위한 사전 시도 자료로 정리했습니다."
+            }
           ]
         },
         {
@@ -784,8 +802,8 @@ function cardHTML(item){
       ${item.body ? `<p>${escapeHTML(item.body)}</p>` : ""}
       ${item.highlight ? `<p class="result">${escapeHTML(item.highlight)}</p>` : ""}
       ${figuresHTML}
-      ${evidenceStepsHTML}
       ${modelsHTML}
+      ${evidenceStepsHTML}
       ${analysisPairsHTML}
       ${videosHTML}
       ${tagsHTML}
