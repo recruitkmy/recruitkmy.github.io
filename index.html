@@ -597,10 +597,15 @@ const DATA = {
           subtitle: "개인 프로젝트 · 브레이크 디스크 해석 전 단계",
           meta: "ANSYS CFX · Steady-State Thermal · Transient Thermal",
           tags: ["ANSYS", "Thermal Analysis", "Heat Flux", "Convection", "Radiation", "Parameter Setup", "Transient Thermal"],
-          body: "브래킷 해석 이후 디스크 브레이크 열-구조 연성해석으로 넘어가기 전에, 열해석 조건 설정을 혼자 다시 정리했습니다. 기본 모델은 200 × 100 × 5 mm 크기의 Al6061 판으로 설정하고, 판 윗면을 열선 형상으로 면 분할해 ANSYS에서 S_HEATER 영역으로 선택할 수 있도록 구성했습니다. 열선 고체를 별도로 만들지 않고 분리된 표면에 Heat Flow를 입력하는 방식으로 단순화하여, Heat Flux·대류계수·과도 가열/냉각 조건을 직접 입력하고 Design Points로 결과값을 비교했습니다.",
-          highlight: "개인 수행 · 200×100×5mm Al6061 판 모델 · S_HEATER 면 분리 · 파라미터 직접 정의 · Design Points 결과 비교",
+          body: "브래킷 해석 이후 디스크 브레이크 열-구조 연성해석으로 넘어가기 전에, 열해석 조건 설정을 혼자 다시 정리했습니다. 기본 모델은 200 × 100 × 5 mm 크기의 Al6061 판으로 설정하고, 판 윗면에 U자형 반복 열선 패턴을 스케치한 뒤 면 분할하여 ANSYS에서 S_HEATER 영역으로 선택할 수 있도록 구성했습니다. 열선 고체를 별도로 만들지 않고 분리된 표면에 Heat Flow를 입력하는 방식으로 단순화하여, Heat Flux·대류계수·과도 가열/냉각 조건을 직접 입력하고 Design Points로 결과값을 비교했습니다.",
+          highlight: "개인 수행 · 200×100×5mm Al6061 판 · U자형 열선 패턴 면 분할 · S_HEATER 설정 · Design Points 결과 비교",
           wide: true,
           evidenceSteps: [
+            {
+              image: "thermal_heater_pattern_surface.png",
+              title: "열선 기본 모델링 조건",
+              body: "기본 형상은 200 × 100 × 5 mm 크기의 Al6061 판으로 설정했습니다. 판 윗면에 U자형 반복 열선 패턴을 직접 스케치하고, 파란색 열선 영역을 별도 Face로 분할해 ANSYS에서 S_HEATER Named Selection으로 선택할 수 있게 만들었습니다. 열선 고체를 따로 만들지 않고 표면 Heat Flow를 입력하는 방식으로 단순화했습니다."
+            },
             {
               image: "thermal_cfx_foundation.png",
               title: "CFX 열전달 해석 기초 확인",
@@ -633,20 +638,18 @@ const DATA = {
           ]
         },
         {
-          title: "자동차 디스크 브레이크 열-구조 연성해석",
-          subtitle: "개인 프로젝트 · 영남대 로봇시스템 실험실",
-          meta: "ANSYS · Thermal-Structural Coupling",
-          tags: ["ANSYS", "Thermal Analysis", "Static Structural", "Thermal-Structural Coupling"],
-          body: "열해석 기초를 마무리한 뒤, 디스크 브레이크 형상별 열-구조 연성해석으로 확장할 계획입니다. 기존에는 Full Disc와 Drilled Disc 모델을 중심으로 형상과 재료 물성을 정리하고, 제동 압력 조건, 시간별 Heat Flux 곡선, 표면별 대류 열전달 계수를 직접 계산·입력하는 과정을 검토했습니다. 이후 온도 분포와 변형 분포를 초기 확인했으며, 해석 조건을 보완하여 형상별 냉각 성능과 구조 변형을 비교하는 방향으로 진행할 예정입니다.",
-          highlight: "Heat Flux 곡선 입력 · 표면별 대류 열전달 계수 도출 · 온도/변형 분포 초기 검토",
+          title: "자동차 디스크 브레이크 형상 모델링",
+          subtitle: "개인 프로젝트 · 논문 기반 형상 모델링",
+          meta: "SolidWorks · Brake Disc Modeling",
+          tags: ["SolidWorks", "Brake Disc", "Modeling"],
+          body: "참고 논문 ‘디스크 브레이크 경량화와 성능 향상을 위한 형상 최적 설계’를 기준으로 디스크 브레이크 형상 4종을 직접 모델링했습니다. 포트폴리오에는 논문 형상과 제가 모델링한 CAD 형상을 대조하는 자료만 정리했습니다.",
+          highlight: "논문 기준 A~D 형상 직접 모델링 · Full / Drilled / Slotted / Drilled with Side Groove",
           wide: true,
-          figures: [
-            { src: "brake_disc_models.png", caption: "Full Disc와 Drilled Disc 모델링 결과" },
-            { src: "brake_boundary_pressure.png", caption: "제동 압력 조건 정리" },
-            { src: "brake_boundary_heatflux.png", caption: "비상 제동 조건의 시간별 Heat Flux 곡선 입력 과정" },
-            { src: "brake_convection_coefficient.png", caption: "회전 조건을 고려한 표면별 대류 열전달 계수 산정 과정" },
-            { src: "brake_temperature_result.png", caption: "비상 제동 열-구조 연성해석 초기 결과: 온도 분포" },
-            { src: "brake_deformation_result.png", caption: "비상 제동 열-구조 연성해석 초기 결과: 변형 분포" }
+          models: [
+            { src: "brake_disc_compare_A.png", caption: "Model A · Full Disc Brake" },
+            { src: "brake_disc_compare_B.png", caption: "Model B · Drilled Disc Brake" },
+            { src: "brake_disc_compare_C.png", caption: "Model C · Slotted Disc Brake" },
+            { src: "brake_disc_compare_D.png", caption: "Model D · Drilled with Side Groove Disc Brake" }
           ]
         },
         {
