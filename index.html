@@ -498,19 +498,6 @@
 const DATA = {
   categories: [
     {
-      id: "certs",
-      label: "자격증",
-      note: "취득 자격",
-      items: [
-        {
-          title: "자동차운전면허 1종 보통",
-          subtitle: "대구광역시경찰청",
-          meta: "취득일 2021.02.08"
-        }
-        // 새 자격증은 이 아래에 { ... } 형태로 콤마 찍고 추가하세요.
-      ]
-    },
-    {
       id: "research",
       label: "연구과제",
       note: "산학 · 로봇 연구개발",
@@ -530,22 +517,7 @@ const DATA = {
           tags: ["Humanoid", "Physical AI", "AI Training", "Autonomous Navigation", "Voice AI", "NVIDIA", "Mechanism Design"],
           body: "경북 지역의 산업 및 공공서비스 환경에 적용 가능한 피지컬 AI 기반 휴머노이드 플랫폼 구축 과제에 참여했습니다. 상용 휴머노이드 플랫폼을 활용하여 안내·대화·음성인식·음성합성·자율주행·장애물 회피 기능을 개발하고, 후속 단계에서 경북형 자체 휴머노이드 모델 제작으로 확장할 수 있는 기반을 마련하는 연구개발 과제입니다.",
           highlight: "총 연구비 6,000만원 · 연구기간 6개월 · 휴머노이드 코딩 부문 참여"
-        },
-        // 새 연구과제는 이 아래에 추가하세요.
-      ]
-    },
-    {
-      id: "language",
-      label: "어학성적",
-      note: "공인 어학 시험",
-      items: [
-        {
-          title: "TOEIC Speaking",
-          subtitle: "YBM 한국 토익 위원회 인증완료",
-          meta: "응시일 2026.03.07",
-          highlight: "Intermediate Mid2 · 120 / 200점"
         }
-        // 새 어학성적은 이 아래에 추가하세요.
       ]
     },
     {
@@ -621,7 +593,6 @@ const DATA = {
               title: "열선 기본 모델링 조건",
               body: "기본 형상은 200 × 100 × 5 mm 크기의 Al6061 판으로 설정했습니다. 판 윗면에 U자형 반복 열선 패턴을 직접 스케치하고, 파란색 열선 영역을 별도 Face로 분할해 ANSYS에서 S_HEATER Named Selection으로 선택할 수 있게 만들었습니다. 열선 고체를 따로 만들지 않고 표면 Heat Flow를 입력하는 방식으로 단순화했습니다."
             },
-
             {
               image: "thermal_parameter_outline.png",
               title: "입력 파라미터 직접 정의",
@@ -684,7 +655,139 @@ const DATA = {
           body: "모터, 카메라·레이저 센서 배치를 고려한 베이스 프레임·브라켓을 설계·제작했습니다. 약 15개 마커 배치와 거리 실측을 통해 방산 부품 제조공장에서 2회 현장실증(회당 3~4시간)을 수행했습니다.",
           highlight: "위치추정 오차 약 10cm → 2~3cm로 개선"
         }
-        // 새 프로젝트는 이 아래에 추가하세요.
+      ]
+    },
+    {
+      id: "papers",
+      label: "제출 논문",
+      note: "학술 활동",
+      items: [
+        {
+          title: "카메라 기반 AprilTag 상대거리 추정 및 모바일 로봇 접근 제어",
+          subtitle: "ICROS 2026 학부생 논문경진대회 · 제어로봇시스템학회",
+          meta: "2026.07.01 · 대구 EXCO · 공동저자 2/4",
+          body: "LIMO Pro 모바일 로봇에 장착된 전방 단안 RGB 카메라와 AprilTag 마커를 이용해 로봇과 목표물 간 상대거리를 추정하고, 이를 기반으로 접근-정지 제어 시스템을 구현했습니다. 마커 크기와 카메라 내부 파라미터를 활용해 OpenCV 기반 pose 추정을 수행하고, 전방 거리와 z 방향 이동벡터를 산출했습니다. ROS 상에서 선속도·각속도 명령을 생성해 목표 거리와의 오차를 줄이는 방식으로 접근 제어를 구성했습니다.",
+          highlight: "정지 상태 54프레임 중 44프레임 검출 · 평균 상대거리 0.9465m 확인",
+          tags: ["AprilTag", "OpenCV", "ROS", "Mobile Robot", "Pose Estimation"]
+        },
+        {
+          title: "소형 이동 객체 대응을 위한 영상 기반 팬·틸트 터렛 시스템 구현 및 성능 평가",
+          subtitle: "한국산학기술학회 · 국내 등재학술지 제출",
+          meta: "공동저자 2/5",
+          body: "Intel RealSense D455 카메라로 획득한 영상에서 객체 중심 좌표를 검출하고, 영상 중심과의 픽셀 오차를 기반으로 DYNAMIXEL 기반 Pan/Tilt 2축 구동부를 제어하는 영상 기반 소형 이동 객체 추적 터렛 시스템을 구현했습니다. Visual Servoing 방식으로 위치 오차를 모터 회전 명령으로 변환하여 목표물을 자동 조준하도록 설계했으며, 객체 검출 실패에 대비해 와이퍼 예측, ROI 재탐색, Template Matching 기반 보조 추적 기능을 적용했습니다.",
+          highlight: "객체 검출·모터 제어 통합 · 화면 오차·락온율·응답 시간 등 정량 지표로 성능 평가",
+          tags: ["RealSense D455", "DYNAMIXEL", "Pan/Tilt", "Visual Servoing", "Object Tracking"]
+        }
+      ]
+    },
+    {
+      id: "training",
+      label: "교육이수사항",
+      note: "교육 · 직무역량",
+      items: [
+        {
+          title: "Google AI Essential",
+          subtitle: "Coursera",
+          meta: "2025.02.10 ~ 2025.02.11 · 10시간",
+          body: "생성형 AI 활용 교육을 통해 AI 기반 아이디어 도출, 콘텐츠 생성, 프롬프트 엔지니어링, 업무 자동화 방법을 학습했으며, AI 활용 시 발생 가능한 편향과 보안 이슈 등 책임 있는 AI 활용 역량을 강화했습니다.",
+          tags: ["Generative AI", "Prompt Engineering", "Responsible AI"]
+        },
+        {
+          title: "2025 상반기 이공계열 직무아카데미(방산)",
+          subtitle: "영남대학교",
+          meta: "2025.05.26 ~ 2025.05.29 · 12시간",
+          body: "방위산업의 중요성과 산업 구조, 국산 방산 분야 현황 및 전망을 학습했으며, 방산 산업의 생산 공정과 설계·생산 직무에 대한 이해를 높였습니다.",
+          tags: ["Defense Industry", "Production", "Engineering Career"]
+        },
+        {
+          title: "2025 상반기 이공계열 직무아카데미(미래자동차)",
+          subtitle: "영남대학교",
+          meta: "2025.05.12 ~ 2025.05.15 · 12시간",
+          body: "차량 전동화, 자율주행, 센서(LiDAR·카메라·레이더), V2X, 스마트팩토리, 디지털 트윈 등 미래 자동차 핵심 기술과 제조 혁신 기술을 학습했습니다.",
+          tags: ["Future Mobility", "Autonomous Driving", "Sensor", "Digital Twin"]
+        },
+        {
+          title: "2025 하계방학 LIG넥스원과 함께하는 방위산업 취업캠프",
+          subtitle: "영남대학교 · LIG D&A",
+          meta: "2025.07.16 ~ 2025.07.18 · 20시간",
+          body: "방위산업 분야 기업 및 직무 이해를 위해 LIG넥스원 기업 소개, 주요 사업 및 생산기술 직무 교육, 현직자 멘토링, 인사담당자 Q&A에 참여했습니다. 자기소개서 작성법과 면접 코칭을 통해 방산 분야 취업 준비 역량을 강화했습니다.",
+          tags: ["Defense Industry", "LIG Nex1", "Production Technology", "Career Camp"]
+        },
+        {
+          title: "Ansys Mechanical 실무 교육",
+          subtitle: "영남대학교 · 태성에스엔이",
+          meta: "2025.07 · 16시간",
+          body: "정적구조, 진동, 열문제에 대한 Ansys 실무 이론 및 실습을 수행했으며, 실제 기업 프로젝트 기반 예제를 활용해 현업 핵심 이슈 해결 방법론을 학습했습니다.",
+          tags: ["ANSYS Mechanical", "Static Structural", "Modal", "Thermal"]
+        },
+        {
+          title: "ANSYS 구조해석 실무를 기반으로 한 AI 확장 교육",
+          subtitle: "영남대학교 · 태성에스엔이",
+          meta: "2026.01 · 4시간",
+          body: "Ansys 구조·동역학 해석 이론을 기업 실무에서 AI와 결합해 활용하는 방법을 학습했으며, 산업 현장 프로젝트 기반 실습을 통해 해석 실무 이해도를 높였습니다.",
+          tags: ["ANSYS", "Structural Analysis", "AI Extension"]
+        },
+        {
+          title: "2026학년도 1학기 미래자동차 직무특강",
+          subtitle: "영남대학교",
+          meta: "2026.05.13 · 3시간",
+          body: "자동차 부품 프레스 생산 공정과 정밀 금형 설계·제작 프로세스를 학습하고, 자동차 차체 구조와 샤시 등 바디프레임 구성 요소를 이해했습니다. 바디 서스펜션 타입별 특징과 차체·의장 설계 요소가 생산 장비와 제조 공정에 미치는 영향을 학습했습니다.",
+          tags: ["Automotive Body", "Press Process", "Mold Design", "Chassis"]
+        }
+      ]
+    },
+    {
+      id: "activities",
+      label: "학내외활동",
+      note: "동아리 · 팀 프로젝트 · 창업 활동",
+      items: [
+        {
+          title: "로봇팔 설계 동아리활동",
+          subtitle: "영남대학교",
+          meta: "2026.01.23 ~ · 로봇 팔 설계 담당",
+          body: "로봇팔 모델을 분석한 후 보유 모터의 크기와 출력 조건에 맞게 구조 및 치수를 재설계하고, 부품 제작·조립 과정을 통해 실제 구동 가능한 로봇팔 시스템을 구현했습니다.",
+          tags: ["Robot Arm", "SolidWorks", "3D Printing", "Assembly"]
+        },
+        {
+          title: "로봇 구동부·센서 모듈 하우징 제작",
+          subtitle: "영남대학교 팀 프로젝트",
+          meta: "2025.09.01 ~ 2026.06.22 · 하우징 제작 담당",
+          body: "로봇 구동부 및 센서 모듈 장착을 위한 베이스 프레임과 브라켓을 설계·제작했습니다. 모터와 카메라·레이저 센서의 배치 조건을 고려한 구조 설계와 조립 과정을 수행하며 로봇 기구 설계 경험을 쌓았습니다.",
+          tags: ["Housing Design", "Sensor Mount", "Bracket", "Robot Mechanism"]
+        },
+        {
+          title: "AI 창업 컨설팅 프로그램 창업 아이템 기획",
+          subtitle: "ModuArm · 다관절 서보모터 기반 모듈형 로봇팔 시스템",
+          meta: "2026.08 · 대표학생",
+          body: "서보모터, 3D 프린팅 링크 구조, 그리퍼를 결합한 교육·연구·경량 자동화용 모듈형 로봇팔 플랫폼을 창업 아이템으로 기획했습니다. 관절별 각도 제어, DH 파라미터 기반 기구학, 순기구학·역기구학 기반 위치 제어, RGB/RGB-D 카메라 및 AI 객체 인식 기반 자동 파지 기능 확장 계획을 정리했습니다.",
+          highlight: "창업 아이템 기획 · 모듈형 로봇팔 플랫폼 · AI 객체 인식 기반 확장 계획",
+          tags: ["Startup", "Robot Arm", "Modular Platform", "Physical AI"]
+        }
+      ]
+    },
+    {
+      id: "certs",
+      label: "자격증",
+      note: "취득 자격",
+      items: [
+        {
+          title: "자동차운전면허 1종 보통",
+          subtitle: "대구광역시경찰청",
+          meta: "취득일 2021.02.08"
+        }
+      ]
+    },
+    {
+      id: "language",
+      label: "어학성적",
+      note: "공인 어학 시험",
+      items: [
+        {
+          title: "TOEIC Speaking",
+          subtitle: "YBM 한국 토익 위원회 인증완료",
+          meta: "응시일 2026.03.07",
+          highlight: "Intermediate Mid2 · 120 / 200점"
+        }
       ]
     },
     {
@@ -706,20 +809,6 @@ const DATA = {
         }
       ]
     },
-    {
-      id: "papers",
-      label: "제출 논문",
-      note: "학술 활동",
-      items: [
-        {
-          title: "예시 항목 — 실제 논문 정보로 바꾸거나 지우세요",
-          subtitle: "학술지/학회명 · 게재(예정)일",
-          body: "초록 요약이나 핵심 기여를 한두 문장으로 정리해서 넣으세요.",
-          tags: []
-        }
-        // 실제 논문이 생기면 위 예시 항목을 지우고 이 자리에 추가하세요.
-      ]
-    }
     // 새 카테고리는 이 아래에 { id, label, note, items } 형태로 추가하세요.
   ]
 };
