@@ -375,6 +375,13 @@
     .main{margin-left:0; padding:40px 22px 90px;}
     .card-grid{grid-template-columns:1fr;}
     .hero h1{font-size:2rem;}
+    .media-grid, .media-grid.models{grid-template-columns:repeat(2, minmax(0, 1fr));}
+    .evidence-card{grid-template-columns:1fr;}
+  }
+  @media (max-width:560px){
+    .hero{flex-direction:column-reverse; gap:20px;}
+    .media-grid, .media-grid.models, .media-grid.videos, .analysis-pair-grid{grid-template-columns:1fr;}
+    .sec-head .sheet-tag{display:none;}
   }
 
   @media (prefers-reduced-motion: reduce){
@@ -459,8 +466,7 @@
       <div id="categories-root"></div>
 
       <footer>
-        <p><span class="fill-in"></span> </p>
-        <p></p>
+        <p>김민영 · kmy120329@gmail.com · 대구</p>
       </footer>
 
     </div>
@@ -738,6 +744,7 @@ const DATA = {
     },
     {
       id: "certs",
+      tag: "certificates",
       label: "자격증",
       note: "취득 자격",
       items: [
@@ -877,7 +884,7 @@ function categorySectionHTML(cat, sheetNo){
     <section id="${cat.id}">
       <div class="sec-head">
         <h2>${escapeHTML(cat.label)}</h2>
-        <span class="sheet-tag">SHEET ${num}<br>${escapeHTML(cat.label).toUpperCase()}</span>
+        <span class="sheet-tag">SHEET ${num}<br>${escapeHTML(cat.tag || cat.id).toUpperCase()}</span>
       </div>
       <div class="dim-divider"><span class="dim-label">${num} — ${escapeHTML(cat.note)}</span></div>
       <div class="card-grid ${cat.id === "research" ? "research-grid" : ""}">${itemsHTML}</div>
