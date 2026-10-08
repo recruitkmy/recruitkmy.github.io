@@ -65,6 +65,21 @@
   .toc a:hover .t{color:var(--orange);}
   .toc-label{position:absolute; top:-26px; font-size:.72rem; font-weight:700; letter-spacing:.12em; color:var(--orange);}
 
+  /* ---- grouped toc ---- */
+  .toc2{display:grid; grid-template-columns:0.9fr 2.2fr 4fr; gap:26px; margin-top:34px; word-break:keep-all;}
+  .toc2 a{text-decoration:none; color:inherit;}
+  .toc2 .gh{display:flex; align-items:baseline; gap:12px; padding-bottom:14px; border-bottom:3px solid var(--orange); margin-bottom:18px;}
+  .toc2 .grp:first-child .gh{border-color:var(--blue);}
+  .toc2 .gno{font-size:2.3rem; font-weight:800; color:var(--orange); line-height:1;}
+  .toc2 .grp:first-child .gno{color:var(--blue);}
+  .toc2 .gt{font-size:1.35rem; font-weight:800;}
+  .toc2 .items{display:grid; grid-template-columns:repeat(var(--n), minmax(0,1fr)); gap:16px;}
+  .toc2 .items a{display:block; border-left:2px solid var(--line); padding-left:12px;}
+  .toc2 .ino{display:block; font-size:.78rem; font-weight:700; color:var(--grey); margin-bottom:2px;}
+  .toc2 .t{font-weight:700; font-size:.98rem; margin:0 0 6px; line-height:1.35;}
+  .toc2 .s{font-size:.78rem; color:var(--ink-soft); margin:0; line-height:1.5;}
+  .toc2 .items a:hover .t, .toc2 .gh:hover .gt{color:var(--orange);}
+
   /* ---- profile ---- */
   .profile{display:grid; grid-template-columns:1fr 1.1fr 1fr; gap:28px;}
   .profile h3{font-size:.92rem; color:var(--orange); margin:18px 0 8px;}
@@ -144,6 +159,8 @@
     .toc a{display:grid; grid-template-columns:56px 1fr; column-gap:10px; padding:10px 0; border-bottom:1px solid var(--line);}
     .toc .no{font-size:1.5rem; height:auto; grid-row:span 2;} .toc .dot{display:none;}
     .toc .t{margin:0;} .toc-label{display:none;}
+    .toc2{grid-template-columns:1fr; gap:22px;}
+    .toc2 .items{grid-template-columns:repeat(2, minmax(0,1fr));}
     .profile,.split,.split.rside{grid-template-columns:1fr;}
     .g3,.g4,.flow{grid-template-columns:repeat(2, minmax(0,1fr));}
     .rowcards{grid-template-columns:1fr;}
@@ -172,14 +189,29 @@
 <section class="slide" id="contents">
   <p class="kicker">CONTENTS</p>
   <h2>목차</h2>
-  <nav class="toc">
-    <a href="#profile"><div class="no">00</div><div class="dot"></div><p class="t">프로필</p><p class="s">학력 · 경력 · 교육<br>자격 · 수상 · 논문</p></a>
-    <a href="#safe-oneq"><span class="toc-label">PROJECTS</span><div class="no">01</div><div class="dot"></div><p class="t">SAFE-ONEQ</p><p class="s">로봇 협업 순찰·관제<br>공장 실증</p></a>
-    <a href="#humanoid"><div class="no">02</div><div class="dot"></div><p class="t">경북형 휴머노이드</p><p class="s">피지컬 AI<br>휴머노이드 플랫폼</p></a>
-    <a href="#focus"><div class="no">03</div><div class="dot"></div><p class="t">포커스 로보틱스</p><p class="s">사족보행 · 로봇 팔<br>공장 관제 시스템</p></a>
-    <a href="#bracket"><div class="no">04</div><div class="dot"></div><p class="t">장갑차 브래킷</p><p class="s">역설계<br>모드·정적 해석</p></a>
-    <a href="#brake"><div class="no">05</div><div class="dot"></div><p class="t">디스크 브레이크</p><p class="s">형상 모델링<br>열해석</p></a>
-    <a href="#turret"><div class="no">06</div><div class="dot"></div><p class="t">팬·틸트 터렛</p><p class="s">캡스톤<br>센서 마운트 설계</p></a>
+  <nav class="toc2">
+    <div class="grp" style="--n:1">
+      <a class="gh" href="#profile"><span class="gno">00</span><span class="gt">프로필</span></a>
+      <div class="items">
+        <a href="#profile"><p class="t">학력 · 경력</p><p class="s">교육 · 자격 · 수상 · 논문</p></a>
+      </div>
+    </div>
+    <div class="grp" style="--n:2">
+      <a class="gh" href="#safe-oneq"><span class="gno">01</span><span class="gt">연구과제</span></a>
+      <div class="items">
+        <a href="#safe-oneq"><span class="ino">1-1</span><p class="t">SAFE-ONEQ</p><p class="s">로봇 협업 순찰·관제<br>공장 실증</p></a>
+        <a href="#humanoid"><span class="ino">1-2</span><p class="t">경북형 휴머노이드</p><p class="s">피지컬 AI<br>휴머노이드 플랫폼</p></a>
+      </div>
+    </div>
+    <div class="grp" style="--n:4">
+      <a class="gh" href="#focus"><span class="gno">02</span><span class="gt">프로젝트</span></a>
+      <div class="items">
+        <a href="#focus"><span class="ino">2-1</span><p class="t">포커스 로보틱스</p><p class="s">사족보행 · 로봇 팔<br>공장 관제 시스템</p></a>
+        <a href="#bracket"><span class="ino">2-2</span><p class="t">장갑차 브래킷</p><p class="s">역설계<br>모드·정적 해석</p></a>
+        <a href="#brake"><span class="ino">2-3</span><p class="t">디스크 브레이크</p><p class="s">형상 모델링<br>열해석</p></a>
+        <a href="#turret"><span class="ino">2-4</span><p class="t">팬·틸트 터렛</p><p class="s">캡스톤<br>센서 마운트 설계</p></a>
+      </div>
+    </div>
   </nav>
   <div class="foot"><span>KIM MINYOUNG · PORTFOLIO</span><span>02</span></div>
 </section>
@@ -254,7 +286,7 @@
 
 <!-- P01 SAFE-ONEQ -->
 <section class="slide" id="safe-oneq">
-  <p class="kicker">PROJECT 01 · 컨소시엄 대표학생 · 2026.04 ~ 2026.12</p>
+  <p class="kicker">RESEARCH 01 · 컨소시엄 대표학생 · 2026.04 ~ 2026.12</p>
   <h2>SAFE-ONEQ 로봇 협업 순찰·관제 플랫폼 실증</h2>
   <div class="split rside">
     <div>
@@ -281,7 +313,7 @@
 
 <!-- P02 Humanoid -->
 <section class="slide" id="humanoid">
-  <p class="kicker">PROJECT 02 · 학생연구보조원 · 2026.07 ~ 2026.12</p>
+  <p class="kicker">RESEARCH 02 · 학생연구보조원 · 2026.07 ~ 2026.12</p>
   <h2>피지컬 AI를 위한 경북형 휴머노이드 제작</h2>
   <div class="split rside">
     <div>
@@ -300,7 +332,7 @@
 
 <!-- P03 Focus Robotics -->
 <section class="slide" id="focus">
-  <p class="kicker">PROJECT 03 · 팀 프로젝트 · 로봇 팔 · Pan/Tilt 카메라 담당</p>
+  <p class="kicker">PROJECT 01 · 팀 프로젝트 · 로봇 팔 · Pan/Tilt 카메라 담당</p>
   <h2>포커스 로보틱스 · 공장 관제 로봇 시스템</h2>
   <p class="lede">CCTV를 보고 현장까지 직접 확인해야 하는 공장 관제를, 높은 도입 비용 없이 로봇으로 대신하기 위해 필요한 기능을 중심으로 세 구성요소를 직접 설계·제작했습니다. 협력 기업을 방문해 현장 의견을 듣고 기능을 구체화했습니다.</p>
   <div class="cards g4">
@@ -315,7 +347,7 @@
 
 <!-- P04 Bracket -->
 <section class="slide" id="bracket">
-  <p class="kicker">PROJECT 04 · 개인 프로젝트 · SolidWorks · ANSYS</p>
+  <p class="kicker">PROJECT 02 · 개인 프로젝트 · SolidWorks · ANSYS</p>
   <h2>장갑차 냉각수 파이프 브래킷 역설계 · 모드/정적 해석</h2>
   <div class="split">
     <div>
@@ -346,7 +378,7 @@
 
 <!-- P05 Brake -->
 <section class="slide" id="brake">
-  <p class="kicker">PROJECT 05 · 개인 프로젝트 · SolidWorks · ANSYS Thermal · CFX</p>
+  <p class="kicker">PROJECT 03 · 개인 프로젝트 · SolidWorks · ANSYS Thermal · CFX</p>
   <h2>디스크 브레이크 형상 모델링 및 열해석 기초 검증</h2>
   <div class="split">
     <div>
@@ -376,7 +408,7 @@
 
 <!-- P06 Turret -->
 <section class="slide" id="turret">
-  <p class="kicker">PROJECT 06 · 4인 팀 프로젝트 · 2025.09 ~ 2026.06</p>
+  <p class="kicker">PROJECT 04 · 4인 팀 프로젝트 · 2025.09 ~ 2026.06</p>
   <h2>팬·틸트 터렛 및 로봇 하우징 제작</h2>
   <p class="lede">소형 이동 객체 대응을 위한 영상 기반 팬·틸트 터렛을 제작했습니다. RealSense D455 카메라로 객체를 인식하고 DYNAMIXEL 모터로 2축을 구동합니다.</p>
   <div class="cards g3">
