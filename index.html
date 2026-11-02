@@ -199,7 +199,7 @@
     <div class="grp" style="--n:2">
       <a class="gh" href="#safe-oneq"><span class="gno">01</span><span class="gt">연구과제</span></a>
       <div class="items">
-        <a href="#safe-oneq"><span class="ino">1-1</span><p class="t">SAFE-ONEQ</p><p class="s">사족보행 · 로봇 팔 · 관제<br>공장 실증</p></a>
+        <a href="#safe-oneq"><span class="ino">1-1</span><p class="t">SAFE-ONEQ</p><p class="s">사족보행 · 관제<br>공장 실증</p></a>
         <a href="#humanoid"><span class="ino">1-2</span><p class="t">경북형 휴머노이드</p><p class="s">피지컬 AI<br>휴머노이드 플랫폼</p></a>
       </div>
     </div>
@@ -289,8 +289,8 @@
   <h2>SAFE-ONEQ 로봇 협업 순찰·관제 플랫폼 실증</h2>
   <div class="split rside">
     <div>
-      <p class="lede">영남대 공간지능 및 로보틱스 연구실과 ㈜에듀원큐가 공동 수행한 산학 과제. 관리자가 CCTV를 보고 현장까지 직접 확인해야 하는 공장 관제를 로봇으로 대신하기 위해 사족보행 로봇 · 로봇 팔 · 관제 시스템을 직접 설계·제작하고, 바닥의 ArUco 마커와 LiDAR·3D 뎁스 카메라로 구축한 3D 맵 위에서 로봇 위치를 실시간 추종하는 통합 관제 플랫폼을 ㈜세안정기 공장에서 실증했습니다.</p>
-      <p><span class="accent">담당</span>&nbsp; 컨소시엄 대표학생 일정 조율 · 로봇 팔 · Pan/Tilt 카메라 · LiDAR 데이터 수집 · 로봇 구동 · ArUco 마커 배치 · 플랫폼 구축</p>
+      <p class="lede">영남대 공간지능 및 로보틱스 연구실과 ㈜에듀원큐가 공동 수행한 산학 과제. 관리자가 CCTV를 보고 현장까지 직접 확인해야 하는 공장 관제를 로봇으로 대신하기 위해 사족보행 로봇 · 관제 시스템을 직접 설계·제작하고, 바닥의 ArUco 마커와 LiDAR·3D 뎁스 카메라로 구축한 3D 맵 위에서 로봇 위치를 실시간 추종하는 통합 관제 플랫폼을 ㈜세안정기 공장에서 실증했습니다.</p>
+      <p><span class="accent">담당</span>&nbsp; 컨소시엄 대표학생 일정 조율 · Pan/Tilt 카메라 · LiDAR 데이터 수집 · 로봇 구동 · ArUco 마커 배치 · 플랫폼 구축</p>
       <p class="muted" style="font-size:.84rem;">ArUco · LiDAR · 3D Depth Camera · YOLOv8 · DQN · DRL</p>
     </div>
     <div class="panel statpanel">
@@ -308,13 +308,12 @@
     <div class="fix"><small>해결 ②</small><p>기둥 2~3개를 직접 세워 마커 재배치</p></div>
   </div>
   <p class="label">시스템 구성 · 담당</p>
-  <div class="cards g4">
+  <div class="cards g3">
     <div class="card"><h4>사족보행 로봇</h4><ul><li>몸체·다리 CAD 설계, 3D 프린팅 제작</li><li>DH 파라미터로 정·역기구학 계산</li><li>crawl 계열 보행을 실제 지면에서 구현</li></ul><p class="fl">설계 → 기구학 → 관절각 → 지면 보행</p></div>
-    <div class="card mine"><h4>로봇 팔 <span class="badge">담당</span></h4><ul><li>부품 직접 설계, 3D 프린팅·조립</li><li>하중·링크 길이·동작 범위·발열 고려 모터 선정</li><li>목표 각도 입력 관절 제어 프로그램</li></ul><p class="fl">설계 → 토크 고려 → 실제 구동</p></div>
     <div class="card"><h4>관제 시스템</h4><ul><li>작업자 검출·추적, 위치·이동 방향 분석</li><li>거리·위험구역 진입으로 위험 판단</li><li>관제 화면에 위험 상태 표시</li></ul><p class="fl">인식 → 위치 → 위험 판단 → 시각화</p></div>
     <div class="card mine"><h4>Pan/Tilt 카메라 <span class="badge">담당</span></h4><ul><li>고정 CCTV의 관찰 범위 보완</li><li>영상 중심-객체 중심 오차로 자동 추적</li><li>반복 실험으로 추적·모터 각도 오차 정량 평가</li></ul><p class="fl">검출 → 오차 계산 → 자동 추적</p></div>
   </div>
-  <p style="margin-top:18px;"><span class="accent">성과</span>&nbsp; 로봇 위치 오차 수십 cm → 수 cm · 2026 제어로봇시스템학회 참가 · 팀 논문 3건 투고 &nbsp;&nbsp; <span class="accent">다음 단계</span>&nbsp; 세 구성요소 통합 연동 및 장시간 운용 성능 검증</p>
+  <p style="margin-top:18px;"><span class="accent">성과</span>&nbsp; 로봇 위치 오차 수십 cm → 수 cm · 2026 제어로봇시스템학회 참가 · 팀 논문 3건 투고 &nbsp;&nbsp; <span class="accent">다음 단계</span>&nbsp; 구성요소 통합 연동 및 장시간 운용 성능 검증</p>
   <div class="foot"><span>KIM MINYOUNG · PORTFOLIO</span><span>04</span></div>
 </section>
 
